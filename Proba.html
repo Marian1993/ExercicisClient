@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    console.log("Hola Mon!");
+
+    /*1.VARIABLES
+    a)No tenen tipus EXPLICIT
+    b)Tenen tipus IMPLICIT
+    c)VAR te ambit de visibilitat de funcio
+    d)Si no posam la paraula reservada VAR es produieix HOISTING(global)
+    e) TIPUS:
+        -String
+        -Number
+        -Symbol
+        -Boolean
+        -Object -> Els arrays són objectes!
+        -Function ->Les funcions son valors
+        -Undefined -> Variable SENSE valor, ex: var y;
+        -Null ->VALOR NULL, ex: y = NULL;
+    f)Els tipus també són dinàmics(poden canviar de tipus)
+     */
+    var x = 3;
+    console.log(x);
+
+    var a = 3;
+    var b = 3.4;
+    var c = "hola";
+    var d = {
+        nom: 'Marian',
+        cognom: 'Martorell'
+    }
+    var e;
+
+    var ab = a + b;// Ho sumara tot
+    var ac = a + c;// Ho pasara tot a String i ho concatenara
+    var ad = a + d;// HO pasa a String hi posa 3[Object Object]
+    var ae = a + e;// Dona NaN
+
+    console.log(ab, typeof ab);
+    console.log(ac, typeof ac);
+    console.log(ad, typeof ad);
+    console.log(ae, typeof ae);
+
+    //Function
+    function suma(a,b) {
+        return a + b;
+    }
+
+    var f = suma(2,3);//Executar funció
+    var g = suma;//Definir funció
+    var h = g(2,3);
+
+</script>
+</body>
+</html>
