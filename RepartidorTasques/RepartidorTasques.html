@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+  const familiaGalmes = {
+    membres: ["pare","mare","fill","filla"],
+    tasques: ["rentadora","netejar cuina","netejar bany"],
+    setmanes: 52
+  };
+  const familiaDuran = {
+    membres: ["pare","mare","fill","filla"],
+    tasques: ["planxar","netejar bany"],
+    setmanes: 4
+  };
+  const familiaLiceu = {
+    membres: ["pare","mare","fill","filla gran","filla petita"],
+    tasques: ["rentadora","netejar cuina","netejar casa","planxar","netejar bany"],
+    setmanes: 12
+  };
+
+  function repartidorTasques(familia){
+
+    for (let i = 0; i < familia.setmanes; i++) {
+
+    var rotacioTasques = familia.membres;
+    var primer = familia.membres[0];
+    console.log("Setmana " + (i + 1))
+
+        for (let j = 0; j < familia.tasques.length; j++) {
+
+            console.log(rotacioTasques[j] + " fara la tasca de " + familia.tasques[j]);
+        }
+        for (let z = 0; z <familia.membres.length; z++) {
+
+            if( z != familia.membres.length-1){
+                rotacioTasques[z] = familia.membres[z+1];
+            }else {
+                rotacioTasques[z] = primer;
+            }
+        }
+    }
+  }
+  repartidorTasques(familiaGalmes);
+  repartidorTasques(familiaDuran);
+  repartidorTasques(familiaLiceu);
+</script>
+</body>
+</html>
