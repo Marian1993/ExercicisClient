@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    /*
+    tipus NUMBER
+
+    parseInt, parteFloat, toString, toFixed
+
+    OPERADORS
+
+    Aritmetics
+    +, -, *, /, %
+
+    Relacionanls
+    <
+    <=
+    >
+    >=
+    ==
+    ===
+    !=
+    !==
+
+    Increments
+    --
+    ++
+
+     */
+
+    function solucionarEquacion2G(a1,b1,c1) {
+
+        var a = parseFloat(a1);
+        var b = parseFloat(b1);
+        var c = parseFloat(c1);
+
+        if(isNaN(a) || isNaN(b) ||isNaN(c)){
+           return {
+               r1: "No té solució",
+               r2: "No té solució"
+           }
+        }
+
+        var numerador1 = -b + Math.sqrt(Math.pow(b,2)- (4 * a * c));
+        var numerador2 = -b - Math.sqrt(Math.pow(b,2)- (4 * a * c));
+
+        var denominador = 2 * a;
+
+        var result1 = numerador1 / denominador;
+        var result2 = numerador2 / denominador;
+
+        if(isNaN(result1)){
+            result1 = "No te solució";
+        }
+        if(isNaN(result2)){
+            result2 = "No te solució";
+        }
+
+        return{
+            r1: result1,
+            r2: result2
+        }
+    }
+    var x = solucionarEquacion2G(2,3,2);
+    console.log(x.r1,x.r2);
+
+</script>
+
+</body>
+</html>

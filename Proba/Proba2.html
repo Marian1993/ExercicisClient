@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    //1-Crea una funció que resolgi una equació de 2 grau
+
+    function solucionarEquacion2G(a,b,c) {
+
+        var numerador1 = -b + Math.sqrt(Math.pow(b,2)-(4*a*c));
+        var numerador2 = -b - Math.sqrt(Math.pow(b,2)-(4*a*c));
+
+        console.log(numerador1);
+        console.log(numerador2);
+
+        var denominador = 2 * a;
+
+        var result1 = numerador1 / denominador;
+        var result2 = numerador2 / denominador;
+
+        return{
+            r1: result1,
+            r2: result2
+        }
+    }
+
+    var x = solucionarEquacion2G(2,3,1);
+    console.log(x.r1,x.r2);
+    
+    //2-Creauna funció que comprovi si una paraula es pàlindom o no
+
+    function paraulaPalindorma(paraula) {
+
+        let lletres = paraula.toLowerCase();
+        var paraulaReves = "";
+
+        for (let i = lletres.length-1; i >= 0; i--) {
+            paraulaReves += lletres.charAt(i);
+        }
+        return paraula === paraulaReves;
+    }
+    function paraulaPalindorma(paraula) {
+
+        return paraula === paraula.split("").reverse().join("");
+    }
+
+
+    console.log(paraulaPalindorma("hola"),paraulaPalindorma("ala"));
+    
+</script>
+
+</body>
+</html>
