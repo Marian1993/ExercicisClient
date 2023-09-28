@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>Hello World!</p>
+
+<script>
+    var paragraf = document.getElementsByTagName("p");
+    console.log(paragraf);
+    var primerParagraf = paragraf[0];
+    console.log( typeof primerParagraf);
+    primerParagraf.innerHTML = "Bye World!";
+    primerParagraf.style.color = "red";
+
+    document.querySelector("p").style.fontSize = "40px"
+</script>
+</body>
+</html>

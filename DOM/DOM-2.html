@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <p id="titol">Títol de la pàgina en lletra 40px</p>
+    <p>Això ha de dir nomes "Primer paragraf" de color verd.</p>
+    <div>
+        <p>Text de color groc.<span>Excepte aquest de color verd</span></p>
+        <p>Text de color vermell.<span>Excepte aquest de color blau</span></p>
+        <p>Text de color verd.<span>Excepte aquest de color groc</span></p>
+    </div>
+    <div>
+        <p class="gran">Text gran (tamany 20px)</p>
+        <p class="gran">Text gran</p>
+        <p class="gran">Text gran</p>
+        <p class="gran">Text gran</p>
+        <p class="gran">Text gran</p>
+        <p class="gran">Text gran</p>
+        <p class="gran">Text gran</p>
+        <p class="gran">Text gran</p>
+        <p class="gran">Text gran</p>
+        <p class="gran">Text gran</p>
+    </div>
+</div>
+
+<script>
+    document.querySelector("#titol").style.fontSize = "40px";
+    document.querySelector("p:nth-child(2)").innerHTML = "Primer  paragraf";
+    document.querySelector("p:nth-child(2)").style.color = "green"
+    document.querySelector("div > div:nth-child(3) > p").style.color = "yellow";
+    document.querySelector("div > div:nth-child(3) > p > span").style.color = "green";
+    document.querySelector("div > div:nth-child(3) > p:nth-child(2)").style.color = "red";
+    document.querySelector("div > div:nth-child(3) > p:nth-child(2) > span").style.color = "blue";
+    document.querySelector("div > div:nth-child(3) > p:nth-child(3)").style.color = "green";
+    document.querySelector("div > div:nth-child(3) > p:nth-child(3) > span").style.color = "yellow";
+    var pTamany = document.querySelectorAll(".gran");
+
+    for (let i = 0; i < pTamany.length; i++) {
+        pTamany[i].style.fontSize = "20px";
+
+    }
+
+
+</script>
+</body>
+</html>
