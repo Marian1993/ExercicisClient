@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Foto</h1>
+    <input type="text" id="foto">
+    <button>Adjunta</button>
+    <div>
+
+    </div>
+
+<script>
+
+    function afegirFoto() {
+
+        var url = document.querySelector("#foto").value;
+        var img = '<img src="' + url + '" width="250" height="250" style="padding: 10px">';
+
+        document.querySelector("div").innerHTML += img;
+    }
+    document.querySelector("button").addEventListener('click',afegirFoto);
+</script>
+</body>
+</html>

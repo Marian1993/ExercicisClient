@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button>Contador</button>
+<p>0</p>
+<script>
+    function sumar() {
+        var numero = parseInt(document.querySelector("p").innerHTML);
+        document.querySelector("p").innerHTML = (numero + 1);
+    }
+    document.querySelector("button").addEventListener('click',sumar);
+</script>
+
+</body>
+</html>
