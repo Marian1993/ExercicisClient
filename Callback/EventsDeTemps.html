@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<p id="timer">00:00:00.000</p>
+<p id="timer" style="font-size: 40px">00:00:00.000</p>
 <button onclick="play()">Play</button>
 <button onclick="pause()">Pause</button>
 <button onclick="reset()">Reset</button>
@@ -17,22 +17,92 @@
     var s = 0;
     var ms = 0;
 
-
-    const temporitzador = document.querySelector("#timer");
+    //Aquesta variable serveix perno activar varies vegades es setInterval i que es cronometre conti més rapid
+    var unaVegada = false;
 
     function play() {
 
-        setInterval()
+        if (!unaVegada){
+
+            iniciar = setInterval(incrementarNumeros,10);
+            unaVegada = true;
+        }
+
+        iniciar
     }
     function pause() {
+        clearInterval(iniciar);
+        unaVegada = false;
 
     }
     function reset() {
 
-        clearInterval();
+        clearInterval(iniciar);
+        ms = 0;
+        s = 0;
+        m = 0;
+        h = 0;
+        ouputNumeros();
+        unaVegada = false;
+
     }
+
+    //Aquesta funció fara que es vegui com es va incrementant el temps.
+    function ouputNumeros() {
+
+        if (ms < 100) {
+            if(ms < 10){
+                var ms1 = '00' + ms;
+            }else {
+                var ms1 = '0' + ms;
+            }
+        }else{
+            var ms1 = ms;
+        }
+
+        if (s < 10) {
+            var s1 = '0' + s;
+        }else{
+            var s1 = s;
+        }
+
+        if (m < 10) {
+            var m1 = '0' + m;
+        }else {
+            var m1 = m;
+        }
+
+        if (h < 10) {
+            var h1 = '0' + h;
+        }else{
+            var h1 = h;
+        }
+        cronomentre = h1 + ':' + m1 + ':' + s1 + '.' + ms1;
+        document.querySelector("#timer").innerHTML = cronomentre;
+    }
+
+    function incrementarNumeros(){
+
+        ouputNumeros();
+
+        if(ms <= 99){
+            ms++;
+        }
+        if(ms == 100){
+            ms = 0;
+            s++;
+        }
+        if(s == 60){
+            s = 0 ;
+            m++;
+        }
+        if(m == 60) {
+            m = 0;
+            h++;
+        }
+    }
+
     /*
-    var comptaAdmiracions =
     setTimeout(function (){
 
         document.querySelector("p").innerHTML = "Adeu!";
