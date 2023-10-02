@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+  //Funció que permeti qualsevol tipus d'operació
+
+  function operar(a, b, operacio) {
+    var x = parseFloat(a);
+    var y = parseFloat(b);
+    if(isNaN(x)|| isNaN(y)){
+      return "NO FUNCIONA";
+    }
+    return operacio(x,y);
+  }
+
+  function suma(a,b) {return a + b;}
+  function resta(a,b) {return a - b;}
+  function multiplicar(a,b) {return a * b;}
+  function dividir(a,b) {return a / b;}
+
+  var resultatSuma = operar(2,3,suma);
+  var resultatResta = operar(2,3,resta);
+
+  //Les funcions de callback cuen es parametres de darrera per defecte, per això la funció es posa a lo darrer
+  var resultat = operar(2,3,function (param1,param2) {
+
+    return Math.pow(param1,param2);
+  })
+
+  console.log(resultatSuma);
+  console.log(resultatResta);
+  console.log(resultat);
+
+</script>
+
+</body>
+</html>
