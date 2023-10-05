@@ -24,8 +24,8 @@
 
         if (!unaVegada){
 
-            iniciar = setInterval(incrementarNumeros,10);
-            unaVegada = true;
+            iniciar = setInterval(incrementarNumeros,1);
+
         }
 
         iniciar
@@ -50,14 +50,15 @@
     //Aquesta funció fara que es vegui com es va incrementant el temps.
     function ouputNumeros() {
 
-        if (ms < 100) {
-            if(ms < 10){
-                var ms1 = '00' + ms;
+        if (ms < 10) {
+            var ms1 = '00' + ms;
+
+        }else{
+            if(ms > 100){
+                var ms1 = ms;
             }else {
                 var ms1 = '0' + ms;
             }
-        }else{
-            var ms1 = ms;
         }
 
         if (s < 10) {
@@ -85,10 +86,10 @@
 
         ouputNumeros();
 
-        if(ms <= 99){
-            ms++;
+        if(ms <= 1000){
+            ms +=10;
         }
-        if(ms == 100){
+        if(ms == 1000){
             ms = 0;
             s++;
         }
@@ -102,22 +103,6 @@
         }
     }
 
-    /*
-    setTimeout(function (){
-
-        document.querySelector("p").innerHTML = "Adeu!";
-
-    },4000)
-
-    var comptaAdmiracions = setInterval(function (){
-        document.querySelector("p").innerHTML += "!";
-    },500)
-
-    function atura() {
-        clearInterval(comptaAdmiracions);
-    }
-
-     */
 
 </script>
 </body>

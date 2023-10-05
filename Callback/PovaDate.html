@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>00:00:00.000</p>
+<script>
+
+    var interval;
+    function initInterval() {
+
+        var inici = Date.now();
+
+        clearInterval(interval);
+        interval = setInterval(function (){
+            var ara = Date.now();
+            var rang = ara - inici;
+            document.querySelector("p").innerHTML = parseDate(rang);
+        },10)
+    }
+
+    function leadZero(time) {
+
+        vare timeParse = parseInt(time);
+        if (timeParse <10){
+            return "0" + timeParse;
+        }else {
+            return timeParse;
+        }
+    }
+
+    function parseDate(milisegons) {
+        var data = new Date(milisegons);
+        return `${leadZero(data.getHours()-1)}:${leadZero(data.getMinutes())}:${leadZero(data.getSeconds())}.${leadZero(data.getMilliseconds())}`;
+    }
+</script>
+</body>
+</html>
