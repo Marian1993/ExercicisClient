@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="https://politecnicllevant.cat">
+    <label>Nom</label>
+    <input name="nom">
+    <label>Telèfon</label>
+    <input name="telefon">
+    <label>Contrasenya</label>
+    <input name="contrasenya">
+    <label>Repetir contrasenya</label>
+    <input name="contrasenya-repetir">
+    <input type="submit" value="Enviar">
+</form>
+
+<script>
+    document.querySelector("form").addEventListener('submit',function (event){
+
+        console.log("Validant el formulari...",event);
+        validarFormulari();
+        //Cancela el comportament per defecte, en cas del formulari no s'enviara
+        event.preventDefault();
+
+    })
+
+    function validarFormulari() {
+
+        var name = document.getElementsByName("nom");
+
+        console.log(name);
+        if(name == ""){
+            console.log("Has d'emplenar el camp nom")
+        }
+
+    }
+</script>
+</body>
+</html>
