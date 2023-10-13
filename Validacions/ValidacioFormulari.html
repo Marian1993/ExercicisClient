@@ -20,22 +20,74 @@
 <script>
     document.querySelector("form").addEventListener('submit',function (event){
 
-        console.log("Validant el formulari...",event);
-        validarFormulari();
-        //Cancela el comportament per defecte, en cas del formulari no s'enviara
-        event.preventDefault();
+        if (validarFormulari()){
+            console.log("Enviant formulari");
+        }else {
+            //Cancela el comportament per defecte, en cas del formulari no s'enviara
+            event.preventDefault();
+        }
+    });
 
-    })
+
 
     function validarFormulari() {
 
-        var name = document.getElementsByName("nom");
+        var valNom = validarNom();
+        var valTel = validarTelefon();
+        var valCon = validarContrasenya();
 
-        console.log(name);
-        if(name == ""){
-            console.log("Has d'emplenar el camp nom")
+        if(valNom && valTel && valCon){
+            return true;
+        }else {
+            return false;
         }
+    }
+    function validarNom() {
 
+        var name = document.querySelector('[name="nom"]');
+
+        //Aquesta expressió regular fa que no pugui contenir cap número
+        var patron = /[\d]/;
+
+        if(name.value.trim() === "" || patron.test(name.value.trim())){
+            name.style.backgroundColor = "red";
+            return false;
+        }else{
+            name.style.backgroundColor = "white";
+            return true;
+        }
+    }
+
+    function validarTelefon() {
+
+        var telefon = document.querySelector('[name="telefon"]');
+
+        //Aquesra expressió regular fa que no pugui contenir cap lletra
+        var patron = /[\D]/;
+
+        if (telefon.value.trim() === "" || telefon.value.trim().length > 9 || telefon.value.trim().length < 9 || patron.test(telefon.value.trim())){
+            telefon.style.backgroundColor = "red";
+            return false;
+        }else {
+            telefon.style.backgroundColor = "white";
+            return true;
+        }
+    }
+
+    function validarContrasenya() {
+
+        var contrasenya = document.querySelector('[name="contrasenya"]');
+        var contRepetida = document.querySelector('[name="contrasenya-repetir"]');
+
+        if (contrasenya.value !== contRepetida.value || contrasenya.value === "" || contRepetida.value === "" || (contrasenya.value.length && contRepetida.value.length > 8) || (contrasenya.value.length && contRepetida.value.length < 6)){
+            contrasenya.style.backgroundColor = "red";
+            contRepetida.style.backgroundColor = "red";
+            return false;
+        }else {
+            contrasenya.style.backgroundColor = "white";
+            contRepetida.style.backgroundColor = "white";
+            return true;
+        }
     }
 </script>
 </body>

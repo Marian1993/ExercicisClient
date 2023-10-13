@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<button onclick="alerta()">Alert</button>
+<button onclick="obrirFinestra()">Obrir</button>
+<button onclick="tancarFinestra()">Tancar Finestra</button>
+<button onclick="tancarFinestraOpen()">Tancar Finestra Oberta</button>
+<script>
+
+    var ventana;
+
+    function alerta(){
+        var nombre = prompt("Dime tu nombre")
+        alert("hola " + nombre)
+    }
+
+    function obrirFinestra(){
+        ventana = window.open("./bomb-window.html","_blank","whidth=200px,heigth=200px")
+    }
+
+    function tancarFinestra(){
+        window.close()
+    }
+
+    function tancarFinestraOpen(){
+        if (ventana) {
+            ventana.close();
+        } else {
+            alert("Primero abre la ventana antes de intentar cerrarla.");
+        }
+    }
+
+</script>
+</body>
+</html>

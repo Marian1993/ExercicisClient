@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="display:flex; gap:10px; padding-left: 20px; justify-content: center"></div>
+<button onclick="refrescar()" style="font-size: 20px; margin-top: 20px">Refrescar</button>
+<p style="font-size: 30px"></p>
+<script>
+    var num = ['ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king'];
+    var palos = ['spades', 'hearts', 'diamonds', 'clubs'];
+    var baralla = [];
+
+    //Aqui es cull la url, i després es fa un get a sa url per collir lo que es pasa per trampes
+    const url = new URL(window.location.href);
+    var trampes = url.searchParams.get("trampes");
+
+    //Cream un objecte amb un arrow function
+    const carta = (numero,palo) => ({numero,palo});
+
+    function jugar(){
+        barallaCartes();
+        repartir();
+    }
+
+    function refrescar() {
+        window.location.reload();
+    }
+
+    //Guanyar quan es fa parella
+    function guanyar() {
+
+        for (let i = 0; i < 5; i++) {
+            for (let j = i+1; j < 5; j++) {
+                if(baralla[i].numero === baralla[j].numero){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //Cream la baralla i le ordenam de manera random
+    function barallaCartes() {
+
+        for (let i = 0; i < palos.length; i++) {
+
+            for (let j = 0; j < num.length; j++) {
+
+                baralla.push(carta(num[j],palos[i]));
+                console.log(baralla[j]);
+            }
+        }
+        baralla.sort(function (){
+            return Math.random() - 0.5;
+        });
+    }
+
+    //Repartim les cartes, creant les etiquetes html
+    function repartir(){
+
+        for (let i = 0; i < 5; i++) {
+            var carta = baralla[i].numero + '_of_' + baralla[i].palo + '.png';
+            document.querySelector('div').innerHTML += '<img src="cards/' + carta + '" style="width: 150px">';
+        }
+        if(trampes){
+            document.querySelector('p').innerHTML += "Has guanyat!!"
+        }else {
+            if (guanyar()){
+                document.querySelector('p').innerHTML += "Has guanyat amb una parella!!"
+            }
+        }
+    }
+    //Iniciam el joc
+    jugar();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<button onclick="jugar()">Jugar</button>
+<button onclick="tancarJoc()">Tancar joc</button>
+<button onclick="tancar()">Tancar tot</button>
+
+<script>
+
+    var finestraJoc;
+
+    function jugar() {
+
+        var decicio = prompt("Vols fer trampes?");
+        var trampes = false;
+
+
+        if(trampes || decicio.toLowerCase() === "si"){
+            alert("Ah... com que ets un trampós? Anem a jugar fàcil.");
+            trampes = true;
+        }else {
+            alert("Ets molt honrat, però segur que perdràs!");
+        }
+        finestraJoc = window.open("PokerBOM.html?trampes=" + trampes,"width=800,height=300");
+    }
+
+    function tancarJoc(){
+        if(finestraJoc) {
+            finestraJoc.close();
+        }
+    }
+
+    function tancar(){
+        tancarJoc();
+        this.window.close();
+    }
+
+</script>
+</body>
+</html>
