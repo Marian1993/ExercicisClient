@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script>
+    function init() {
+
+        pintaImg();
+
+        var lletres = "abcdefghijklmnopqrstuvwxyz".split("");
+
+        for (let i = 0; i < lletres.length; i++) {
+            //document.querySelector('#app').innerHTML += `<button onclick="play('${lletres[i]}')">${lletres[i]}</button>`;
+            //document.querySelector('#app').innerHTML += `<button>${lletres[i]}</button>`;
+            pintaLletra(lletres[i]);
+        }
+        var buttons = document.querySelectorAll("button");
+
+        for (var i = 0; i < buttons.length; i++) {
+
+            buttons[i].addEventListener('click',function (){
+                //A
+                console.log("Button", this.innerHTML);
+            });
+
+        }
+    }
+
+    function pintaImg() {
+        document.querySelector('#app').innerHTML += `<img src="img/1.PNG" alt="penjat">`;
+    }
+    function pintaLletra(lletra) {
+        return document.querySelector('#app').innerHTML += `<button onclick="play('${lletra}')">${lletra}</button>`;
+    }
+    init();
+</script>
+</body>
+</html>

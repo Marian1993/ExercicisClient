@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body onload="init()">
+        <script>
+            //Paraules
+            const paraules = ['linux', 'windows', 'macos', 'javascript'];
+
+            //Lletres
+            const lletres = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+            //Símbol que posarem per ocultar la lletra
+            const hideLetter = '__';
+
+            var paraula;
+            var paraulaEncriptada = [];
+            var numImatge = 1;
+
+            function init() {
+                //Seleccionem la paraula que emprarem.
+                var randomIndex = Math.floor(Math.random() * paraules.length);
+                paraula = paraules[randomIndex];
+                paraula = paraula.split(''); //Convertim la paraula (String) a un array
+
+                //Encriptem la paraula (el primer cop només tindrem guions)
+                for (i = 0; i < paraula.length; i++) {
+                    paraulaEncriptada.push(hideLetter);
+                }
+
+                /* PINTAR */
+
+                //Pintem la imatge
+                var divImatge = document.createElement('DIV');
+                divImatge.style = 'text-align: center';
+
+                var imatge = document.createElement('IMG');
+                imatge.id = 'imatgePenjat';
+                divImatge.appendChild(imatge);
+                document.body.appendChild(divImatge);
+
+                pintarPenjat(1);
+
+                //DIV amb el resultat   
+                var divResultat = document.createElement('DIV');
+                divResultat.id = "paraulaEncriptada";
+                divResultat.style = 'text-align: center; margin: 30px;'
+                document.body.appendChild(divResultat);
+
+                //DIV amb un missatge
+                var divMissatge = document.createElement('DIV');
+                divMissatge.id = "missatge";
+                divMissatge.style = 'text-align: center; margin: 30px; font-size:2em; color: red;'
+                document.body.appendChild(divMissatge);
+
+                pintarParaulaEncriptada();
+
+                //Pintem les lletres
+                var divLletres = document.createElement('DIV');
+                divLletres.style = 'text-align: center;';
+                for (i = 0; i < lletres.length; i++) {
+                    var boto = document.createElement('BUTTON');
+                    boto.innerHTML = lletres[i];
+                    boto.id = 'lletra_' + lletres[i];
+                    boto.style = 'font-size:20px; margin: 10px; padding: 5px; box-shadow: 0 0 4px black; width: 50px; height: 50px;';
+                    boto.addEventListener("click", function () {
+                        var lletraTrobada = comprovarParaula(this.innerHTML);
+                        pintarParaulaEncriptada();
+
+                        if (lletraTrobada) {
+                            this.style.backgroundColor = 'green';
+                        } else {
+                            this.style.backgroundColor = 'red';
+                            numImatge++;
+                            pintarPenjat(numImatge);
+                        }
+
+                        comprovarJoc();
+                    });
+
+                    divLletres.appendChild(boto);
+                }
+                document.body.appendChild(divLletres);
+
+                /* AVANÇAT */
+                document.body.addEventListener("keypress", function (e) {
+                    var keyCode = e.keyCode;
+                    var char = String.fromCharCode(keyCode);
+                    //Ho transformem a minúscules per si ho han premut en majúscules
+                    char = char.toLowerCase();
+
+                    var objLletra = document.getElementById('lletra_' + char);
+                    //Aquesta comprovació la fem per si hi ha alguna lletra que no existeixi (números, símbols...)
+                    if (objLletra) {
+                        objLletra.click();
+                    }
+                });
+            }
+
+            //Paraula i paraulaEncriptada tindran la mateixa longitud, per tant
+            //podem recórrer qualsevol de les dues
+            function comprovarParaula(lletra) {
+                var trobat = false;
+                for (i = 0; i < paraula.length; i++) {
+                    if (paraula[i] === lletra) {
+                        paraulaEncriptada[i] = lletra;
+                        trobat = true;
+                    }
+                }
+
+                return trobat;
+            }
+
+            function comprovarJoc() {
+                //Comprovem si hem perdut
+                if (numImatge == 7) {
+                    document.querySelector("#missatge").innerHTML='Has Perdut';
+                    setTimeout(function(){
+                        window.location.reload(true);
+                    },3000)
+                }
+
+                //comprovem si hem guanyat
+                var guanyat = true;
+                for (i = 0; i < paraulaEncriptada.length; i++) {
+                    if (paraulaEncriptada[i] === hideLetter) {
+                        guanyat = false;
+                    }
+                }
+                if (guanyat) {
+                    document.querySelector("#missatge").innerHTML='Has Guanyat';
+                    setTimeout(function(){
+                        window.location.reload(true);
+                    },3000)
+                }
+            }
+
+            function pintarParaulaEncriptada() {
+                document.getElementById('paraulaEncriptada').innerHTML = paraulaEncriptada.join('  ');
+            }
+
+            function pintarPenjat(numImatge) {
+                document.getElementById('imatgePenjat').src = 'img/' + numImatge + '.PNG';
+            }
+
+
+        </script>
+    </body>
+</html>

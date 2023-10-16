@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    function Membre(nom) {
+        this.nom = nom;
+    }
+    function Tasca(nom) {
+        this.nom = nom;
+    }
+    function tascaManager(membres,tasques,setmanes) {
+            //ALgoritmeper mesclar les tasques
+        return[]
+    }
+
+    function pintarConsola(tascaManager) {
+        //Pintar el resultat
+    }
+    function init() {
+        var membresGalmes = [
+            new Membre("Pare"),
+            new Membre("Mare"),
+            new Membre("Fill"),
+            new Membre("Filla")
+        ]
+        var tasquesGalmes = [
+            new Tasca("posar rentadora"),
+            new Tasca("fer la cuina neta"),
+            new Tasca("fer el bany")
+        ]
+        var planificacioGalmes = 52;
+
+        var membresDuran = [
+            new Membre("Pare"),
+            new Membre("Mare"),
+            new Membre("Fill"),
+            new Membre("Filla")
+        ]
+        var tasquesDuran = [
+            new Tasca("planxar"),
+            new Tasca("fer el bany")
+        ]
+        var planificacioDuran = 4;
+
+        var membresLiceu = [
+            new Membre("Pare"),
+            new Membre("Mare"),
+            new Membre("Fill"),
+            new Membre("Filla gran"),
+            new Membre("Filla petita")
+        ]
+        var tasquesLiceu = [
+            new Tasca("posar rentadora"),
+            new Tasca("fer la cuina neta"),
+            new Tasca("fer la casa neta"),
+            new Tasca("planxar"),
+            new Tasca("fer el bany")
+        ]
+        var planificacioLiceu = 12;
+
+        var distribucioGalmes = tascaManager(membresGalmes,tasquesGalmes,planificacioGalmes);
+        var distribucioDuran = tascaManager(membresDuran,tasquesDuran,planificacioDuran);
+        var distribucioLiceu = tascaManager(membresLiceu,tasquesLiceu,planificacioLiceu);
+
+        pintarConsola(distribucioGalmes);
+        pintarConsola(distribucioDuran);
+        pintarConsola(distribucioLiceu);
+
+    }
+    init();
+</script>
+</body>
+</html>
