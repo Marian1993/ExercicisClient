@@ -11,29 +11,79 @@
 <script>
     function init() {
 
-        pintaImg();
+        var penjat = new Penjat();
+        penjat.init();
 
-        var lletres = "abcdefghijklmnopqrstuvwxyz".split("");
-
-        for (let i = 0; i < lletres.length; i++) {
-            //document.querySelector('#app').innerHTML += `<button onclick="play('${lletres[i]}')">${lletres[i]}</button>`;
-            //document.querySelector('#app').innerHTML += `<button>${lletres[i]}</button>`;
-            pintaLletra(lletres[i]);
-        }
-        var buttons = document.querySelectorAll("button");
-
-        for (var i = 0; i < buttons.length; i++) {
-
-            buttons[i].addEventListener('click',function (){
-                //A
-                console.log("Button", this.innerHTML);
-            });
-
-        }
     }
 
-    function pintaImg() {
-        document.querySelector('#app').innerHTML += `<img src="img/1.PNG" alt="penjat">`;
+    //Models
+    function Lletra(valor,estat) {
+        // Estats: NO_SELECCIONAT,OK,KO
+        this.valor = valor;
+        this.estat = estat;
+        this.pintar = function(lletra) {
+            return document.querySelector('#app').innerHTML += `<button onclick="play('${this.valor}')">${this.valor}</button>`;
+
+            var buttons = document.querySelectorAll("button");
+
+            for (var i = 0; i < buttons.length; i++) {
+
+                buttons[i].addEventListener('click',function (){
+
+                    console.log("Button", this.innerHTML);
+                });
+            }
+        }
+    }
+    function Paraula(lletres) {
+
+
+        this.lletres = lletres;
+    }
+
+    function Penjat(){
+        this.paraula;
+        this.lletres = [];
+        this.init = function (){
+            pintaImg(1);
+
+            var lletres = "abcdefghijklmnopqrstuvwxyz".split("");
+
+            for (let i = 0; i < lletres.length; i++) {
+                var lletra = new Lletra(lletres[i],"NO_SELECCIONAT");
+                this.lletres.push(lletra);
+                lletra.pintar();
+            }
+            console.log(this.lletres);
+            var paraules = ["casa","moix","taula","vinil"];
+            var paraula = paraules[Math.floor(Math.random()*paraules.length)];
+
+            var lletresParaula = [];
+
+            for (var i = 0; i < paraula.length; i++) {
+                for (var j = 0; j < lletres.length; j++) {
+                    if (paraula[i] === this.lletres[j].valor){
+                        lletresParaula.push(this.lletres[j]);
+                    }
+                }
+            }
+            this.paraula = new Paraula(lletresParaula);
+            this.lletres[0].estat = "KO";
+            console.log(this.paraula);
+        }
+        this.jugar = function (){
+
+
+        }
+        this.pintar = function (){
+
+        }
+
+    }
+
+    //Vistes
+    function pintaImg(num) {
+        document.querySelector('#app').innerHTML += `<img src="img/${num}.PNG" alt="penjat">`;
     }
     function pintaLletra(lletra) {
         return document.querySelector('#app').innerHTML += `<button onclick="play('${lletra}')">${lletra}</button>`;
