@@ -9,6 +9,8 @@
 
 </div>
 <script>
+
+    var penjat;
     function init() {
 
         var penjat = new Penjat();
@@ -21,38 +23,62 @@
         // Estats: NO_SELECCIONAT,OK,KO
         this.valor = valor;
         this.estat = estat;
+        this.jugar = function (){
+            //innerHTML cull es valor de dedins es tag button
+            console.log("Button", this.valor);
+            //Jugar amb lletra(this.innerHTML)
+            penjat.jugar(this.valor);
+            //Amb de canviar de funcio pintar de lletra, perque pinti si es correcte o no
+
+            //repintar la paraula
+            //actualitzar imatge si fa falta
+
+        }
         this.pintar = function(lletra) {
-            return document.querySelector('#app').innerHTML += `<button onclick="play('${this.valor}')">${this.valor}</button>`;
+            if (this.estat ==="OK"){
+                return `<button disabled style="background: green">${this.valor}</button>`;
+            }else if(this.estat === "KO"){
+                return `<button disabled style="background: red">${this.valor}</button>`;
+            }else {
+                return `<button>${this.valor}</button>`;
+            }
+
 
             var buttons = document.querySelectorAll("button");
 
             for (var i = 0; i < buttons.length; i++) {
 
                 buttons[i].addEventListener('click',function (){
-
-                    console.log("Button", this.innerHTML);
                 });
             }
         }
     }
     function Paraula(lletres) {
 
-
         this.lletres = lletres;
+        this.pintar = function () {
+            var result = [];
+            for (var i = 0; i < this.lletres.length; i++) {
+                if (this.lletres[i].estat === "OK"){
+                    result.push(this.lletres[i].valor);
+                }else {
+                    result.push("__")
+                }
+            }
+            document.querySelector("#app").innerHTML += result.join(" ");
+        }
     }
 
     function Penjat(){
         this.paraula;
         this.lletres = [];
         this.init = function (){
-            pintaImg(1);
 
             var lletres = "abcdefghijklmnopqrstuvwxyz".split("");
 
             for (let i = 0; i < lletres.length; i++) {
                 var lletra = new Lletra(lletres[i],"NO_SELECCIONAT");
                 this.lletres.push(lletra);
-                lletra.pintar();
             }
             console.log(this.lletres);
             var paraules = ["casa","moix","taula","vinil"];
@@ -68,15 +94,53 @@
                 }
             }
             this.paraula = new Paraula(lletresParaula);
-            this.lletres[0].estat = "KO";
-            console.log(this.paraula);
+
+            this.pintar();
         }
-        this.jugar = function (){
+        this.jugar = function (lletra){
 
+            var lletraSeleccionada;
 
+            for (var i = 0; i < this.paraula.lletres.length; i++) {
+
+               if(this.lletres[i].valor === lletra){
+
+                   lletraSeleccionada = this.lletres[i];
+                   break;
+               }
+            }
+            var trobat = false;
+            for (var i = 0; i < this.paraula.lletres.length; i++) {
+                if(this.paraula.lletres[i] === lletraSeleccionada){
+                    trobat = true;
+                    break;
+                }
+
+            }
+            trobat === true?lletraSeleccionada.estat="OK":lletraSeleccionada.estat="KO";
+            /*
+            if (trobat){
+                lletraSeleccionada.estat = "OK";
+            }else {
+                lletraSeleccionada.estat = "KO";
+            }
+
+             */
         }
         this.pintar = function (){
 
+            document.querySelector("#app").innerHTML = '<div id="imatge"></div>';
+            document.querySelector("#app").innerHTML += '<div id="lletres"></div>';
+            document.querySelector("#app").innerHTML += '<div id="paraula"></div>';
+
+            //Pintar l'imatge
+
+            //Pintar les lletres
+
+            for (var i = 0; i < this.lletres.length; i++) {
+                document.querySelector("#lletres").innerHTML += this.lletres[i].pintar();
+            }
+            //Pintar la paraula
         }
 
     }
@@ -87,6 +151,12 @@
     }
     function pintaLletra(lletra) {
         return document.querySelector('#app').innerHTML += `<button onclick="play('${lletra}')">${lletra}</button>`;
+    }
+    function init() {
+        penjat = new Penjat();
+        penjat.init();
+        penjat.pintar();
+
     }
     init();
 </script>
