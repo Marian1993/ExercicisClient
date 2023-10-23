@@ -11,12 +11,6 @@
 <script>
 
     var penjat;
-    function init() {
-
-        var penjat = new Penjat();
-        penjat.init();
-
-    }
 
     //Models
     function Lletra(valor,estat) {
@@ -24,33 +18,22 @@
         this.valor = valor;
         this.estat = estat;
         this.jugar = function (){
-            //innerHTML cull es valor de dedins es tag button
-            console.log("Button", this.valor);
-            //Jugar amb lletra(this.innerHTML)
-            penjat.jugar(this.valor);
-            //Amb de canviar de funcio pintar de lletra, perque pinti si es correcte o no
-
-            //repintar la paraula
-            //actualitzar imatge si fa falta
+            penjat.jugar(this.innerHTML);
+            penjat.pintar();
 
         }
         this.pintar = function(lletra) {
+
+            console.log("entra");
+            var nodeLletra = document.createElement("BUTTON");
+            nodeLletra.innerHTML = this.valor;
+            nodeLletra.addEventListener('click',this.jugar);
             if (this.estat ==="OK"){
-                return `<button disabled style="background: green">${this.valor}</button>`;
+                nodeLletra.style.backgroundColor = "green";
             }else if(this.estat === "KO"){
-                return `<button disabled style="background: red">${this.valor}</button>`;
-            }else {
-                return `<button>${this.valor}</button>`;
+                nodeLletra.style.backgroundColor = "red";
             }
-
-
-            var buttons = document.querySelectorAll("button");
-
-            for (var i = 0; i < buttons.length; i++) {
-
-                buttons[i].addEventListener('click',function (){
-                });
-            }
+            return nodeLletra;
         }
     }
     function Paraula(lletres) {
@@ -59,13 +42,13 @@
         this.pintar = function () {
             var result = [];
             for (var i = 0; i < this.lletres.length; i++) {
-                if (this.lletres[i].estat === "OK"){
+                if (lletres[i].estat === "OK"){
                     result.push(this.lletres[i].valor);
                 }else {
-                    result.push("__")
+                    result.push("__");
                 }
             }
-            document.querySelector("#app").innerHTML += result.join(" ");
+            return  result.join(" ");
         }
     }
 
@@ -76,19 +59,19 @@
 
             var lletres = "abcdefghijklmnopqrstuvwxyz".split("");
 
-            for (let i = 0; i < lletres.length; i++) {
+            for (var i = 0; i < lletres.length; i++) {
                 var lletra = new Lletra(lletres[i],"NO_SELECCIONAT");
                 this.lletres.push(lletra);
             }
-            console.log(this.lletres);
+
             var paraules = ["casa","moix","taula","vinil"];
-            var paraula = paraules[Math.floor(Math.random()*paraules.length)];
+            var paraulaSeleccionada = paraules[Math.floor(Math.random()*paraules.length)];
 
             var lletresParaula = [];
 
-            for (var i = 0; i < paraula.length; i++) {
-                for (var j = 0; j < lletres.length; j++) {
-                    if (paraula[i] === this.lletres[j].valor){
+            for (var i = 0; i < paraulaSeleccionada.length; i++) {
+                for (var j = 0; j < this.lletres.length; j++) {
+                    if (paraulaSeleccionada[i] === this.lletres[j].valor){
                         lletresParaula.push(this.lletres[j]);
                     }
                 }
@@ -97,35 +80,30 @@
 
             this.pintar();
         }
-        this.jugar = function (lletra){
+        this.jugar = function(lletra){
 
             var lletraSeleccionada;
 
-            for (var i = 0; i < this.paraula.lletres.length; i++) {
-
+            for (var i = 0; i < this.lletres.length; i++) {
                if(this.lletres[i].valor === lletra){
-
                    lletraSeleccionada = this.lletres[i];
-                   break;
                }
             }
-            var trobat = false;
+            var trobat;
+
             for (var i = 0; i < this.paraula.lletres.length; i++) {
                 if(this.paraula.lletres[i] === lletraSeleccionada){
                     trobat = true;
                     break;
                 }
-
             }
-            trobat === true?lletraSeleccionada.estat="OK":lletraSeleccionada.estat="KO";
-            /*
+
             if (trobat){
                 lletraSeleccionada.estat = "OK";
             }else {
                 lletraSeleccionada.estat = "KO";
             }
 
-             */
         }
         this.pintar = function (){
 
@@ -134,28 +112,28 @@
             document.querySelector("#app").innerHTML += '<div id="paraula"></div>';
 
             //Pintar l'imatge
+            var numErrors = 0;
+
+            for (var i = 0; i < lletres.length; i++) {
+                if(this.lletres[i].estat === "KO");
+                numErrors++;
+            }
+            document.querySelector('#imatge').innerHTML = `<img src="img/${numErrors+1}.PNG" alt="penjat">`;
 
             //Pintar les lletres
-
             for (var i = 0; i < this.lletres.length; i++) {
-                document.querySelector("#lletres").innerHTML += this.lletres[i].pintar();
+                document.querySelector("#lletres").appendChild(this.lletres[i].pintar());
+                //document.querySelector("#lletres").innerHTML += this.lletres[i].pintar();
             }
+
             //Pintar la paraula
+            document.querySelector('#paraula').innerHTML = this.paraula.pintar();
         }
 
-    }
-
-    //Vistes
-    function pintaImg(num) {
-        document.querySelector('#app').innerHTML += `<img src="img/${num}.PNG" alt="penjat">`;
-    }
-    function pintaLletra(lletra) {
-        return document.querySelector('#app').innerHTML += `<button onclick="play('${lletra}')">${lletra}</button>`;
     }
     function init() {
         penjat = new Penjat();
         penjat.init();
-        penjat.pintar();
 
     }
     init();
