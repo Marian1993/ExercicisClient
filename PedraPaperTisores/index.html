@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="main">
+    <h2>Exercici 3</h2>
+    <div id="missatge"></div>
+    <div id='hand1'></div>
+    <div id='hand2'></div>
+    <button id="jugar">Jugar</button>
+    <button id="ajuda">Ajuda</button>
+    <button id="tancarajuda">Tancar Ajuda</button>
+    <button id="redirigir">Ves a la web d'Es Liceu</button>
+</div>
+<script>
+
+    var eleccions = ["paper","pedra","tisores"];
+    var finestra;
+    var eleccioCorrecta = true;
+
+    document.querySelector("#jugar").addEventListener('click',Init);
+
+    document.querySelector("#ajuda").onclick = function (){
+        finestra = window.open("ajuda.html","finestra","width=600,height=400,modal=yes");
+    }
+    document.querySelector("#tancarajuda").onclick = function (){
+        if(finestra){
+            finestra.close();
+        }
+    }
+    document.querySelector("#redirigir").onclick = function (){
+        location.href = "https://www.politecnicllevant.cat/";
+    }
+
+    function Jugar(){
+
+        this.eleccioMaquina = eleccions[Math.floor(Math.random() * eleccions.length)];
+        this.usuari  = function (){
+
+            //Aqui deman a l'usuari que elegesqui i mir que estigui entre les 3 elecions
+            do{
+                var resposta = prompt("Elegueix entre (pedra, paper i tisores)");
+
+                if(!(resposta.toLowerCase() === "pedra") && !(resposta.toLowerCase() === "tisores") && !(resposta.toLowerCase() === "paper")){
+                    alert("Has de posar una de les accions anteriors");
+                    eleccioCorrecta = false;
+                }else {
+                    return resposta;
+                }
+            }while(!eleccioCorrecta);
+
+        }
+        this.eleccioGuanyador= function (usuari){
+            if((usuari === "paper")){
+                if(this.eleccioMaquina === "pedra"){
+                    return "1";
+                }else if(this.eleccioMaquina === "tisores"){
+                    return "2";
+                }else {
+                    return "3";
+                }
+            }
+            if((usuari === "pedra")){
+                if(this.eleccioMaquina === "tisores"){
+                    return "1";
+                }else if(this.eleccioMaquina === "paper"){
+                    return "2";
+                }else {
+                    return "3";
+                }
+            }
+            if((usuari === "tisores")){
+                if(this.eleccioMaquina === "paper"){
+                    return "1";
+                }else if(this.eleccioMaquina === "pedra"){
+                    return "2";
+                }else {
+                    return "3";
+                }
+            }
+        }
+        this.init = function () {
+            //Ho inicialitz tot
+            var elecciousuari = this.usuari();
+            var pintar = new Pintar();
+            var eleccioGuanyador = this.eleccioGuanyador(elecciousuari)
+            pintar.eleccio(elecciousuari,this.eleccioMaquina);
+            pintar.guanyar(eleccioGuanyador);
+        }
+    }
+
+    //Vistes
+    function Pintar() {
+
+        this.eleccio = function (usuari,maquina){
+            document.querySelector('#hand1').innerHTML = `<img src="bloc1-ut1_ut2_ut3-esquelet/images/${usuari}.png" width="300px">`;
+            document.querySelector('#hand2').innerHTML = `<img src="bloc1-ut1_ut2_ut3-esquelet/images/${maquina}.png" width="300px">`;
+        }
+
+        this.guanyar = function (numero) {
+            if(numero === "1"){
+                document.querySelector('#missatge').innerHTML = '<p>Has guanyat</p>';
+            }else if(numero === "2"){
+                document.querySelector('#missatge').innerHTML = '<p>Ha guanyat la maquina</p>';
+            }else {
+                document.querySelector('#missatge').innerHTML = '<p>Heu empatat</p>';
+            }
+        }
+    }
+    //Iniciar joc
+    function Init(){
+        var jugar = new Jugar();
+        jugar.init();
+    }
+
+</script>
+</body>
+</html>
