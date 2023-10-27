@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button id="prova1">Prova 1</button>
+    <button id="prova2">Prova 2</button>
+    <button id="prova3">Prova 3</button>
+</div>
+<script>
+    "use strict"
+    function Penjat(lletres) {
+        this.lletres = [];
+        this.init = function(){
+            console.log("Init penjat");
+        }
+    }
+
+    //IIFE
+    (function (){
+        const penjat = new Penjat();
+        penjat.init();
+
+        /*
+        var idBotons = ["prova1","prova2","prova3"];
+        for (var i = 0; i < idBotons.length; i++) {
+
+            document.querySelector("#" + idBotons[i]).addEventListener('click',function (){
+                alert(this.id + "---" + i);
+            });
+        }
+
+         */
+
+        const idBotons = ["prova1","prova2","prova3"];
+        for (let i = 0; i < idBotons.length; i++) {
+
+            document.querySelector("#" + idBotons[i]).addEventListener('click',function (){
+                alert(this.id + "---" + i);
+            });
+        }
+    })();
+</script>
+</body>
+</html>

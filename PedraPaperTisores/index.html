@@ -54,42 +54,44 @@
             }while(!eleccioCorrecta);
 
         }
-        this.eleccioGuanyador= function (usuari){
-            if((usuari === "paper")){
-                if(this.eleccioMaquina === "pedra"){
-                    return "1";
-                }else if(this.eleccioMaquina === "tisores"){
-                    return "2";
-                }else {
-                    return "3";
-                }
-            }
-            if((usuari === "pedra")){
-                if(this.eleccioMaquina === "tisores"){
-                    return "1";
-                }else if(this.eleccioMaquina === "paper"){
-                    return "2";
-                }else {
-                    return "3";
-                }
-            }
-            if((usuari === "tisores")){
-                if(this.eleccioMaquina === "paper"){
-                    return "1";
-                }else if(this.eleccioMaquina === "pedra"){
-                    return "2";
-                }else {
-                    return "3";
-                }
-            }
-        }
+
         this.init = function () {
             //Ho inicialitz tot
             var elecciousuari = this.usuari();
             var pintar = new Pintar();
-            var eleccioGuanyador = this.eleccioGuanyador(elecciousuari)
             pintar.eleccio(elecciousuari,this.eleccioMaquina);
-            pintar.guanyar(eleccioGuanyador);
+            pintar.guanyar(eleccioGuanyador(elecciousuari,this.eleccioMaquina));
+        }
+    }
+
+    function eleccioGuanyador(usuari,eleccioMaquina) {
+
+        if((usuari === "paper")){
+            if(eleccioMaquina === "pedra"){
+                return "1";
+            }else if(eleccioMaquina === "tisores"){
+                return "2";
+            }else {
+                return "3";
+            }
+        }
+        if((usuari === "pedra")){
+            if(eleccioMaquina === "tisores"){
+                return "1";
+            }else if(eleccioMaquina === "paper"){
+                return "2";
+            }else {
+                return "3";
+            }
+        }
+        if((usuari === "tisores")){
+            if(eleccioMaquina === "paper"){
+                return "1";
+            }else if(eleccioMaquina === "pedra"){
+                return "2";
+            }else {
+                return "3";
+            }
         }
     }
 
