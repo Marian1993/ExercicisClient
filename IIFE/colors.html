@@ -23,7 +23,7 @@
                 // color,background,width,height
                 console.log(color);
                 document.body.style.backgroundColor = "#" + color.background;
-                document.body.innerHTML += `<div style="background: #${color.color}; width: ${color.width}; height: ${color.height}"></div>`
+                document.body.innerHTML += `<div style="background: ${'#' + color.color}; width: ${color.width + 'px'}; height: ${color.height + 'px'}"></div>`
             })
     }
 </script>
