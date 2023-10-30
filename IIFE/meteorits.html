@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="myDate" type="date">
+<button id="enviar">Enviar</button>
+<div id="resposta"></div>
+<script>
+
+    document.querySelector("#enviar").addEventListener("click",nasa);
+    function nasa(){
+        const data = document.querySelector("#myDate").value;
+
+        fetch(`https://theteacher.codiblau.com/public/exercicis/nasa?date=${data}`)
+            .then(function (reposta) {
+                return reposta.json();
+            })
+            .then(function (asteroides) {
+                document.querySelector("#resposta").innerHTML ="<ul>";
+                for (let i = 0; i < asteroides.length; i++) {
+                    document.querySelector("#resposta").innerHTML += `<li>${asteroides[i].asteroid_name}</li>`
+                }
+                document.querySelector("#resposta").innerHTML += "</ul>";
+            })
+    }
+
+
+</script>
+</body>
+</html>

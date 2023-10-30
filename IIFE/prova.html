@@ -10,6 +10,7 @@
     <button id="prova2">Prova 2</button>
     <button id="prova3">Prova 3</button>
 </div>
+<div id="aeroports"></div>
 <script>
     "use strict"
     function Penjat(lletres) {
@@ -42,6 +43,20 @@
                 alert(this.id + "---" + i);
             });
         }
+
+        //  "/nasa?date="
+        fetch("https://theteacher.codiblau.com/public/exercicis/airports")
+            .then(function (reposta) {
+                return reposta.json();
+            })
+            .then(function (airports) {
+                document.querySelector("#aeroports").innerHTML ="<ul>";
+                for (let i = 0; i < 10; i++) {
+                    document.querySelector("#aeroports").innerHTML += `<li>${airports[i].code} -> ${airports[i].name}</li>`
+                }
+                document.querySelector("#aeroports").innerHTML += "</ul>";
+
+            })
     })();
 </script>
 </body>

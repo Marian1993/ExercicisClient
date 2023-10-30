@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="pintar">Pintar</button>
+
+<script>
+
+    document.querySelector("#pintar").addEventListener("click",pintarColors);
+    function pintarColors(){
+
+        const alturaMax = 1000;
+        const alturaMin = 500;
+
+        fetch(`https://theteacher.codiblau.com/public/exercicis/other/color?max=${alturaMax}&min=${alturaMin}`)
+            .then(function (reposta) {
+                return reposta.json();
+            })
+            .then(function (color) {
+                // color,background,width,height
+                console.log(color);
+                document.body.style.backgroundColor = "#" + color.background;
+                document.body.innerHTML += `<div style="background: #${color.color}; width: ${color.width}; height: ${color.height}"></div>`
+            })
+    }
+</script>
+</body>
+</html>
