@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<button id="pintar">Pintar</button>
+<button id="pintar" onclick="pintarColors()">Pintar</button>
 
 <script>
 
@@ -23,7 +23,7 @@
                 // color,background,width,height
                 console.log(color);
                 document.body.style.backgroundColor = "#" + color.background;
-                document.body.innerHTML += `<div style="background: ${'#' + color.color}; width: ${color.width + 'px'}; height: ${color.height + 'px'}"></div>`
+                document.body.innerHTML += `<div style="background: ${'#' + color.color}; width: ${color.width + 'px'}; height: ${color.height + 'px'}"></div>`;
             })
     }
 </script>

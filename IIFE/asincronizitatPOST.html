@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    //IIFE
+    (function (){
+        for (let i = 1; i <= 10; i++) {
+            //Objecte anonim
+            fetch(`https://theteacher.codiblau.com/public/exercicis/other/asincron-post`,
+                {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body:'num=' + i
+
+                })
+                .then(function (resposat){
+                    return resposat.text();
+                })
+                .then(function (num){
+                    document.querySelector('#app').innerHTML += `<p>${num}</p>`;
+                })
+        }
+    })();
+
+</script>
+</body>
+</html>
