@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="theme-color" content="#045FB4">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    function Peca(nom,color,moviments){
+        this.nom = nom;
+        this.color = color;
+        this.moviments = moviments;
+        this.jugar = function (){
+            return new Promise(function (resolve, reject){
+                moviments();
+                const superimportant = "Super Important information!";
+                const x = {
+                    text: function (){
+                        return new Promise();
+                    },
+                    json:function (result){
+                        return new Promise(function (res,rej) {
+                            try{
+                                const json = JSON.parse(result);
+                                res(json);
+                            }catch (e){
+                                rej(e);
+                            }
+                        });
+                    }
+                }
+                setTimeout(function (){
+                    resolve(x);
+                },2000);
+            })
+        }
+        this.comprovar = function (){
+            return new Promise();
+        }
+    }
+
+    function Escacs(){
+        const peo1blanc = new Peca('Peo','blanc',function (){
+            console.log('Peo 1 blanc');
+        })
+        const cavall1negre = new Peca('Cavall','negre',function (){
+            console.log('Cavall 1 negre');
+        })
+        //peo1blanc.moviments();
+        const play = peo1blanc.jugar().then(function (resposta){
+            console.log("Ha acabat de jugar" + play);
+            console.log(resposta);
+        }).catch(function (resposta){
+            console.error("Ha anat malament :'(");
+            console.error(resposta);
+        });
+        console.log("Jugar Peo 1 blanc ->" + play);
+    }
+
+    (function (){
+        new Escacs();
+    })()
+</script>
+</body>
+</html>
