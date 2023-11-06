@@ -9,10 +9,32 @@
     <label for="nom">Nom: </label>
     <input type="text" id="nom" name="nom"></br>
     <label>Sexe: </label>
-    <input type="checkbox" id="masc" name="masc">
+    <input type="radio" id="masc" name="sexe" value="Mascle">
     <label for="masc">Mascle</label>
-    <input type="checkbox" id="fem" name="fem">
-    <label for="fem">Femella</label>
+    <input type="radio" id="fem" name="sexe">
+    <label for="fem">Femella</label></br>
+    <label for="nRegistre">Número de registre: </label>
+    <input type="text" id="nRegistre" name="nRegistre"></br>
+    <label for="nFederat">Número de federat: </label>
+    <input type="text" id="nFederat" name="nFederat"></br>
+    <label for="tipusCa">Tipus: </label>
+    <select id="tipusCa" name="tipusCa">
+        <option>Ca (de raça o no)</option>
+        <option value="si">Si</option>
+        <option value="no">No</option>
+    </select></br>
+    <label for="tipusCavall">Tipus: </label>
+    <select id="tipusCavall" name="tipusCavall">
+        <option>Cavall (de carreres o no)</option>
+        <option value="si">Si</option>
+        <option value="no">No</option>
+    </select></br>
+    <label for="tipusMoix">Tipus: </label>
+    <select id="tipusMoix" name="tipusMoix">
+        <option>Moix</option>
+    </select>
+    <button type="submit">Enviar</button>
 </form>
+<script src="Animals.js"></script>
 </body>
 </html>

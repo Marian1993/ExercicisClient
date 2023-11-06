@@ -6,9 +6,14 @@
         }).then(function (animals){
             const taula = document.querySelector("#llista");
 
+
         for (let i = 0; i < animals.length; i++) {
 
-           console.log(animals[i]);
+            let filaAnimal = '<tr>';
+            filaAnimal += `<td>${animals[i].nom}</td>`;
+            filaAnimal += '<td><a href="animalForm.html">Editar</a></td>';
+            filaAnimal += '</tr>';
+            taula.innerHTML += filaAnimal;
         }
 
     })
