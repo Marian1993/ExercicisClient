@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+    (function (){
+        const nombresPromise = [];
+        for (let i = 1; i <= 10; i++) {
+            nombresPromise.push(fetch(`https://theteacher.codiblau.com/public/exercicis/other/asincron-get?num=${i}`))
+        }
+        Promise.all(nombresPromise).then(function (promesesResoltes){
+            const jsonPromise = [];
+            for (let i = 0; i < promesesResoltes.length; i++) {
+                jsonPromise.push(promesesResoltes[i].text());
+            }
+            Promise.all(jsonPromise).then(function (jsonResolt){
+                for (let i = 0; i < jsonResolt.length; i++) {
+                    document.querySelector('#app').innerHTML += `<p>${jsonResolt[i]}</p>`;
+
+                }
+            })
+        })
+    })();
+</script>
+
+</body>
+</html>

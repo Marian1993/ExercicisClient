@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+
+    (function (){
+
+        fetch(`https://theteacher.codiblau.com/public/exercicis/other/usuaris/list`)
+            .then(function (r){
+                return r.json();
+            })
+            .then(function (r){
+                document.querySelector('#app').innerHTML += `<ul>`;
+
+                for (let i = 0; i < r.length; i++) {
+                    fetch(`https://theteacher.codiblau.com//public/exercicis/other/usuaris/transport`, {
+                        method: 'POST',
+                        headers:{
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        body: 'idtransport=' + r[i].transport_idtransport
+                    })
+                    .then(function (r2){
+                        return r2.json()
+                    })
+                    .then(function (imatge){
+                        document.querySelector('#app').innerHTML += '<li>';
+                        document.querySelector('#app').innerHTML += r[i].nom + ' ' + r[i].cognom1 + ' ' + r[i].cognom2;
+                        document.querySelector('#app').innerHTML += `<img src="${imatge.url}" alt="foto">`;
+                        document.querySelector('#app').innerHTML += '</li>';
+                    })
+                }
+                document.querySelector('#app').innerHTML += `</ul>`;
+                //Com fer que surti al final
+                document.querySelector('#app').innerHTML += `<p>FINAL DE LA LLISTA</p>`;
+
+
+            })
+
+    })();
+
+    (function (){
+        const llistaUsuaris = [];
+        llistaUsuaris.push(fetch(`https://theteacher.codiblau.com/public/exercicis/other/usuaris/list`));
+        Promise.all(llistaUsuaris).then(function (promesaResolta){
+            const jsonPromise = [];
+            for (let i = 0; i < promesaResolta.length; i++) {
+                jsonPromise.push(promesaResolta[i].json());
+            }
+            Promise.all(jsonPromise).then(function (jsonResolt){
+                for (let i = 0; i < jsonResolt.length; i++) {
+                    document.querySelector('#app').innerHTML += `<p>${jsonResolt[i]}</p>`;
+
+                }
+            })
+        })
+
+    })();
+</script>
+</body>
+</html>
