@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+<script type="module">
+    'use strict';
+
+    import {bucle as peticions} from './js/async-asincron.js';
+
+    // IIFE
+    (async function () {
+        const numeros = await peticions(10);
+        for (let i = 0; i < numeros.length; i++) {
+            document.querySelector("#app").innerHTML += `<p>${numeros[i]}</p>`;
+        }
+    })()
+</script>
+</body>
+</html>

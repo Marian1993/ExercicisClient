@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="module" src="js/script1.js"></script>
+<script type="module" src="js/script2.js"></script>
+<script type="module">
+import {x as x1} from './js/script1.js';
+import {x as x2} from './js/script2.js';
+
+console.log(x1);
+console.log(x2);
+
+</script>
+</body>
+</html>
