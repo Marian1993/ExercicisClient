@@ -17,23 +17,13 @@
     <input type="text" id="nRegistre" name="nRegistre"></br>
     <label for="nFederat">Número de federat: </label>
     <input type="text" id="nFederat" name="nFederat"></br>
-    <label for="tipusCa">Tipus: </label>
-    <select id="tipusCa" name="tipusCa">
-        <option>Ca (de raça o no)</option>
-        <option value="si">Si</option>
-        <option value="no">No</option>
+    <label for="tipus">Tipus: </label>
+    <select id="tipus" name="tipus">
+        <option value="moix">Moix</option>
+        <option value="ca">Ca (de raça o no)</option>
+        <option value="cavall">Cavall (de carreres o no)</option>
     </select></br>
-    <label for="tipusCavall">Tipus: </label>
-    <select id="tipusCavall" name="tipusCavall">
-        <option>Cavall (de carreres o no)</option>
-        <option value="si">Si</option>
-        <option value="no">No</option>
-    </select></br>
-    <label for="tipusMoix">Tipus: </label>
-    <select id="tipusMoix" name="tipusMoix">
-        <option>Moix</option>
-    </select>
-    <button type="submit">Enviar</button>
+    <button type="submit" onclick="save()">Enviar</button>
 </form>
 <script src="Animals.js"></script>
 </body>
