@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form id="formulari">
+<form id="formulari" method="post">
     <label for="nom">Nom: </label>
     <input type="text" id="nom" name="nom"></br>
     <label>Sexe: </label>
@@ -13,10 +13,14 @@
     <label for="masc">Mascle</label>
     <input type="radio" id="fem" name="sexe">
     <label for="fem">Femella</label></br>
-    <label for="nRegistre">Número de registre: </label>
-    <input type="text" id="nRegistre" name="nRegistre"></br>
-    <label for="nFederat">Número de federat: </label>
-    <input type="text" id="nFederat" name="nFederat"></br>
+    <div id="registre">
+        <label for="nRegistre">Número de registre: </label>
+        <input type="text" id="nRegistre" name="nRegistre"></br>
+    </div>
+    <div id="federat">
+        <label for="nFederat">Número de federat: </label>
+        <input type="text" id="nFederat" name="nRegsitre"></br>
+    </div>
     <label for="tipus">Tipus: </label>
     <select id="tipus" name="tipus">
         <option value="moix">Moix</option>
@@ -25,6 +29,6 @@
     </select></br>
     <button type="submit" onclick="save()">Enviar</button>
 </form>
-<script src="Animals.js"></script>
+<script src="service/animalService.js"></script>
 </body>
 </html>

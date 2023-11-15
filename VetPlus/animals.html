@@ -17,6 +17,26 @@
 
     </tbody>
 </table>
-<script src="Animals.js"></script>
+<script type="module">
+    "use strict"
+
+    import {getAnimals} from "./service/animalService.js";
+
+    (async function (){
+        const animals = await getAnimals();
+        const taula = document.querySelector("#llista");
+
+        for (let i = 0; i < animals.length; i++) {
+
+            let idHref = "animalForm.html?id=" + animals[i].idanimal;
+            let filaAnimal = '<tr>';
+            filaAnimal += `<td>${animals[i].nom}</td>`;
+            filaAnimal += `<td><a href=${idHref} >Editar</a></td>`;
+            filaAnimal += '</tr>';
+            taula.innerHTML += filaAnimal;
+        }
+    })();
+
+</script>
 </body>
 </html>
