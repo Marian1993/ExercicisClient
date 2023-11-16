@@ -1,4 +1,4 @@
-export function Usuari(nom,cognom1,cognom2,transport) {
+export function Usuari(nom,cognom1,cognom2, transport) {
 
     this.nom = nom;
     this.cognom1 = cognom1;

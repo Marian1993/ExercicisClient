@@ -1,8 +1,8 @@
 
 import {Animal} from "../model/animal.js";
-//export const urlJson = "https://theteacher.codiblau.com/public/vetplus/";
+export const urlJson = "https://theteacher.codiblau.com/public/vetplus/";
 
-function prova(){
+export function elegirAnimal(){
     document.querySelector("#tipus").addEventListener('change',(ev) =>{
         if(ev.target.value === 'ca'){
             document.querySelector("#federat").style.display = "none";
@@ -17,11 +17,8 @@ function prova(){
     })
 }
 
-
-
-
 export async function getAnimals() {
-    const peticio = await fetch('https://theteacher.codiblau.com/public/vetplus/getAnimals')
+    const peticio = await fetch(urlJson + 'getAnimals')
 
         const animal = await peticio.json();
 
@@ -35,46 +32,24 @@ function jsonToAnimal(json){
     return new Animal(json.idanimal, json.nom, json.sexe, json.numregistre, json.tipus);
 }
 
-function getAnimal() {
+export async function getAnimal() {
 
     const url = new URL(window.location.href);
     const id = url.searchParams.get("id");
 
-    fetch(urlJson + 'getAnimals')
-        .then(function (resposta){
-            return resposta.json();
-        }).then(function (animals) {
-            const animal = animals.find(({idanimal}) => idanimal == id);
+    const peticio = await fetch(urlJson + 'getAnimals')
 
+            const animals = await peticio.json();
+console.log(animals);
+            const animal = animals.find(({idanimal}) => idanimal == id);
+            console.log(id);
             console.log(animal);
 
-            document.querySelector("#nom").value = animal.nom;
-            if(animal.sexe.toLowerCase() === 'fem'){
-                document.querySelector("#masc").checked = true;
-            }else {
-                document.querySelector("#fem").checked = true;
-            }
-            if(animal.tipus.toLowerCase() === 'ca'){
-                document.querySelector("#federat").style.display = "none";
-                document.querySelector("#nRegistre").value = animal.numregistre;
-            }else if(animal.tipus.toLowerCase() === 'cavall'){
-                document.querySelector("#registre").style.display = "none";
-                document.querySelector("#nFederat").value = animal.numregistre;
-            }else if(animal.tipus.toLowerCase() === 'moix'){
-                document.querySelector("#registre").style.display = "none";
-                document.querySelector("#federat").style.display = "none";
-            }
-            if(animal.tipus.toLowerCase() === 'ca'){
-                document.querySelector("#tipus")[1].setAttribute('selected','selected');
-            }else if(animal.tipus.toLowerCase() === 'cavall'){
-                document.querySelector("#tipus")[2].setAttribute('selected','selected');
+            return animal;
 
-            }else if(animal.tipus.toLowerCase() === 'moix'){
-                document.querySelector("#tipus")[0].setAttribute('selected','selected');
 
-            }
 
-        })
+
 
 }
 

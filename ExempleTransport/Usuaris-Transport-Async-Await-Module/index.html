@@ -9,13 +9,14 @@
 <script type="module">
     "use strict"
 
-    import {findAllUsers} from "./service/usuariService.js";
+    import {findAllusuarisTransport} from "./controlador/UsuariTransportControlador.js";
+
     (async function (){
-        const usuaris = await findAllUsers();
+        const usuaris = await findAllusuarisTransport();
         for (let i = 0; i < usuaris.length; i++) {
 
             document.querySelector('#app').innerHTML += '<li>' +  usuaris[i].nom + ' ' + usuaris[i].cognom1 + ' ' + usuaris[i].cognom2 + '</li>';
-            document.querySelector('#app').innerHTML += `<img src="${usuaris[i].url}" alt="foto">`;
+            document.querySelector('#app').innerHTML += `<img src="${usuaris[i].transportObj.url}" alt="foto">`;
 
         }
     })();

@@ -29,6 +29,42 @@
     </select></br>
     <button type="submit" onclick="save()">Enviar</button>
 </form>
-<script src="service/animalService.js"></script>
+<script type="module">
+
+    //Si no te id asa url es nou, sino rellena
+    "use strict"
+
+    import {getAnimal} from "./service/animalService.js";
+
+    (async function (){
+        const animal = await getAnimal();
+        document.querySelector("#nom").value = animal.nom;
+        if(animal.sexe.toLowerCase() === 'fem'){
+            document.querySelector("#masc").checked = true;
+        }else {
+            document.querySelector("#fem").checked = true;
+        }
+        if(animal.tipus.toLowerCase() === 'ca'){
+            document.querySelector("#federat").style.display = "none";
+            document.querySelector("#nRegistre").value = animal.numregistre;
+        }else if(animal.tipus.toLowerCase() === 'cavall'){
+            document.querySelector("#registre").style.display = "none";
+            document.querySelector("#nFederat").value = animal.numregistre;
+        }else if(animal.tipus.toLowerCase() === 'moix'){
+            document.querySelector("#registre").style.display = "none";
+            document.querySelector("#federat").style.display = "none";
+        }
+        if(animal.tipus.toLowerCase() === 'ca'){
+            document.querySelector("#tipus")[1].setAttribute('selected','selected');
+        }else if(animal.tipus.toLowerCase() === 'cavall'){
+            document.querySelector("#tipus")[2].setAttribute('selected','selected');
+
+        }else if(animal.tipus.toLowerCase() === 'moix'){
+            document.querySelector("#tipus")[0].setAttribute('selected','selected');
+
+        }
+    })();
+
+</script>
 </body>
 </html>

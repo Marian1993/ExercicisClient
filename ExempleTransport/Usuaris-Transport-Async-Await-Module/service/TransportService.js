@@ -1,7 +1,7 @@
-import {Transport} from "../model/transport.js";
+import {Transport} from "../model/Transport.js";
 
 export async function getTransportById(id){
-    const peticio = fetch(`https://theteacher.codiblau.com//public/exercicis/other/usuaris/transport`, {
+    const peticio = fetch(`https://theteacher.codiblau.com/public/exercicis/other/usuaris/transport`, {
         method: 'POST',
         headers:{
             "Content-Type": "application/x-www-form-urlencoded"
