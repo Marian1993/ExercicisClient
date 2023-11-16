@@ -5,29 +5,29 @@
     <title>Title</title>
 </head>
 <body>
-<form id="formulari" method="post">
+<form id="formulari">
     <label for="nom">Nom: </label>
-    <input type="text" id="nom" name="nom"></br>
+    <input type="text" id="nom" name="nom" required></br>
     <label>Sexe: </label>
-    <input type="radio" id="masc" name="sexe" value="Mascle">
+    <input type="radio" id="masc" name="sexe" value="MASC" required>
     <label for="masc">Mascle</label>
-    <input type="radio" id="fem" name="sexe">
+    <input type="radio" id="fem" name="sexe" value="FEM">
     <label for="fem">Femella</label></br>
-    <div id="registre">
+    <div id="registre" style="display: none">
         <label for="nRegistre">Número de registre: </label>
         <input type="text" id="nRegistre" name="nRegistre"></br>
     </div>
-    <div id="federat">
+    <div id="federat" style="display: none">
         <label for="nFederat">Número de federat: </label>
-        <input type="text" id="nFederat" name="nRegsitre"></br>
+        <input type="text" id="nFederat" name="nFederat"></br>
     </div>
     <label for="tipus">Tipus: </label>
-    <select id="tipus" name="tipus">
-        <option value="moix">Moix</option>
+    <select id="tipus" name="tipus" required>
+        <option selected="true" value="moix">Moix</option>
         <option value="ca">Ca (de raça o no)</option>
         <option value="cavall">Cavall (de carreres o no)</option>
     </select></br>
-    <button type="submit" onclick="save()">Enviar</button>
+    <button onclick="prova()">Enviar</button>
 </form>
 <script type="module">
 
@@ -35,35 +35,86 @@
     "use strict"
 
     import {getAnimal} from "./service/animalService.js";
+    import {save} from "./service/animalService.js";
 
-    (async function (){
-        const animal = await getAnimal();
-        document.querySelector("#nom").value = animal.nom;
-        if(animal.sexe.toLowerCase() === 'fem'){
-            document.querySelector("#masc").checked = true;
-        }else {
-            document.querySelector("#fem").checked = true;
-        }
-        if(animal.tipus.toLowerCase() === 'ca'){
-            document.querySelector("#federat").style.display = "none";
-            document.querySelector("#nRegistre").value = animal.numregistre;
-        }else if(animal.tipus.toLowerCase() === 'cavall'){
-            document.querySelector("#registre").style.display = "none";
-            document.querySelector("#nFederat").value = animal.numregistre;
-        }else if(animal.tipus.toLowerCase() === 'moix'){
-            document.querySelector("#registre").style.display = "none";
-            document.querySelector("#federat").style.display = "none";
-        }
-        if(animal.tipus.toLowerCase() === 'ca'){
-            document.querySelector("#tipus")[1].setAttribute('selected','selected');
-        }else if(animal.tipus.toLowerCase() === 'cavall'){
-            document.querySelector("#tipus")[2].setAttribute('selected','selected');
+    const url = new URL(window.location.href);
+    const id = url.searchParams.get("id");
 
-        }else if(animal.tipus.toLowerCase() === 'moix'){
-            document.querySelector("#tipus")[0].setAttribute('selected','selected');
 
+    if(id !== null){
+        (async function (){
+            const animal = await getAnimal(id);
+            document.querySelector("#nom").value = animal.nom;
+            if(animal.sexe.toLowerCase() === 'fem'){
+                document.querySelector("#masc").checked = true;
+            }else {
+                document.querySelector("#fem").checked = true;
+            }
+            if(animal.tipus.toLowerCase() === 'ca'){
+                document.querySelector("#federat").style.display = "none";
+                document.querySelector("#nRegistre").value = animal.numregistre;
+            }else if(animal.tipus.toLowerCase() === 'cavall'){
+                document.querySelector("#registre").style.display = "none";
+                document.querySelector("#nFederat").value = animal.numregistre;
+            }else if(animal.tipus.toLowerCase() === 'moix'){
+                document.querySelector("#registre").style.display = "none";
+                document.querySelector("#federat").style.display = "none";
+            }
+            if(animal.tipus.toLowerCase() === 'ca'){
+                document.querySelector("#tipus")[1].setAttribute('selected','selected');
+            }else if(animal.tipus.toLowerCase() === 'cavall'){
+                document.querySelector("#tipus")[2].setAttribute('selected','selected');
+
+            }else if(animal.tipus.toLowerCase() === 'moix'){
+                document.querySelector("#tipus")[0].setAttribute('selected','selected');
+
+            }
+        })();
+    }else {
+
+        document.querySelector("#tipus").addEventListener('change',(ev) =>{
+            if(ev.target.value === 'ca'){
+                document.querySelector("#federat").style.display = "none";
+                document.querySelector("#registre").style.display = "block";
+            }else if(ev.target.value === 'cavall'){
+                document.querySelector("#registre").style.display = "none";
+                document.querySelector("#federat").style.display = "block";
+            }else if(ev.target.value === 'moix'){
+                document.querySelector("#registre").style.display = "none";
+                document.querySelector("#federat").style.display = "none";
+            }
+        })
+    }
+    function prova() {
+        const nom = document.querySelector("#nom").value;
+        const opcioSexe = document.getElementsByName("sexe");
+        let sexe;
+        for (const element of opcioSexe) {
+            if (element.checked) {
+                sexe = element.value;
+                break;
+            }
         }
-    })();
+        const tipus = document.querySelector("#tipus").value;
+        let registre;
+        if (tipus === 'ca') {
+            registre = document.querySelector("#nRegistre").value;
+            console.log(registre);
+        } else if (tipus === 'cavall') {
+            registre = document.querySelector("#nFederat").value;
+            console.log(registre);
+        } else {
+            registre = null;
+        }
+        console.log("entra");
+        console.log(nom);
+        console.log(sexe);
+        console.log(registre);
+        console.log(tipus);
+
+        //save(nom, tipus, registre, tipus);
+    }
+
 
 </script>
 </body>
