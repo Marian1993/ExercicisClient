@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button id="boto1">Press me 1</button>
+    <button id="boto2">Press me 2</button>
+</div>
+<script>
+
+    //this = objecte DOM
+    document.querySelector("#boto1").addEventListener('click',function (){
+      console.log(this);
+      //Aqui es necessari posar this, per sabre sobre que ha de fer style
+      this.style.background = "blue";
+    })
+    //this = windows
+    document.querySelector("#boto2").addEventListener('click',()=>{
+      console.log(this);
+      //this.style.background = "blue"; -> això no funciona!!
+
+      //Aqui no falta posar this, perque scope es de windows
+      document.querySelector("#boto2").style.background = "yellow";
+    })
+    function Persona(nom, cognoms) {
+
+      this.nom = nom;
+      this.cognoms = cognoms;
+      this.nomComplet =  function (){
+          return this.nom + " " + this.cognoms;
+      }
+      this.nomComplet2 = () => this.nom + " " + this.cognoms;
+    }
+
+    const marian = new Persona("Marian","Martorell");
+
+    console.log("Nom: " + marian.nom + " Nom Complet:" + marian.nomComplet() + " Nom Complet2: " + marian.nomComplet2());
+
+    //IMPORTANT
+    //SCOPE del this es de la instacia, no de la definicio
+    //const nomCompletMarian = marian.nomComplet;
+    //Aqui s'arregla posant un bin, diguent on apunta es this
+    const nomCompletMarian = marian.nomComplet.bind(marian);
+    console.log("Nom complet: " + nomCompletMarian());
+
+    //SCOPE es de la definicio, no de la instancia
+    const nomCompletMarian2 = marian.nomComplet2;
+    console.log("Nom complet: " + nomCompletMarian2());
+</script>
+</body>
+</html>

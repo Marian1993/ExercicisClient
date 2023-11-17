@@ -27,11 +27,10 @@
         <option value="ca">Ca (de raça o no)</option>
         <option value="cavall">Cavall (de carreres o no)</option>
     </select></br>
-    <button onclick="prova()">Enviar</button>
+    <button type="submit">Enviar</button>
 </form>
 <script type="module">
 
-    //Si no te id asa url es nou, sino rellena
     "use strict"
 
     import {getAnimal} from "./service/animalService.js";
@@ -39,7 +38,6 @@
 
     const url = new URL(window.location.href);
     const id = url.searchParams.get("id");
-
 
     if(id !== null){
         (async function (){
@@ -85,7 +83,7 @@
             }
         })
     }
-    function prova() {
+    function getValue() {
         const nom = document.querySelector("#nom").value;
         const opcioSexe = document.getElementsByName("sexe");
         let sexe;
@@ -104,7 +102,7 @@
             registre = document.querySelector("#nFederat").value;
             console.log(registre);
         } else {
-            registre = null;
+            registre = "";
         }
         console.log("entra");
         console.log(nom);
@@ -115,6 +113,12 @@
         //save(nom, tipus, registre, tipus);
     }
 
+    (function (){
+        document.querySelector("#formulari").addEventListener("submit",function(event){
+            event.preventDefault();
+            getValue();
+        })
+    })();
 
 </script>
 </body>

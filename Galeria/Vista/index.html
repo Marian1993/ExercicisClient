@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script type="module">
+    import {findAllCategories} from "../Servei/CategoriaService.js";
+    import {findAllGaleries} from "../Servei/GaleriaService.js";
+
+    (function (){
+        findAllGaleries();
+        findAllCategories()
+    })();
+
+</script>
+</body>
+</html>
