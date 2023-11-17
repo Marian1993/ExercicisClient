@@ -30,11 +30,7 @@ export async function getAnimal(id) {
 
  export async function save(nom,sexe,numregistre,tipus) {
 
-    console.log(nom);
-    console.log(sexe);
-    console.log(numregistre);
-    console.log(tipus);
-    /*const saveFetch = await fetch(this.urlJson + 'save',{
+    const saveFetch = await fetch(urlJson + 'save',{
         method: 'post',
         headers:{
             'Content-Type': 'application/json'
@@ -49,9 +45,6 @@ export async function getAnimal(id) {
             }
         })
     })
-
-    const saved = await saveFetch.json();
+    const saved = await saveFetch;
     console.log(saved);
-
-     */
 }

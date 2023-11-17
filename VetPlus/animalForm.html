@@ -43,16 +43,18 @@
         (async function (){
             const animal = await getAnimal(id);
             document.querySelector("#nom").value = animal.nom;
-            if(animal.sexe.toLowerCase() === 'fem'){
+            if(animal.sexe.toLowerCase() === 'masc'){
                 document.querySelector("#masc").checked = true;
             }else {
                 document.querySelector("#fem").checked = true;
             }
             if(animal.tipus.toLowerCase() === 'ca'){
                 document.querySelector("#federat").style.display = "none";
+                document.querySelector("#registre").style.display = "block";
                 document.querySelector("#nRegistre").value = animal.numregistre;
             }else if(animal.tipus.toLowerCase() === 'cavall'){
                 document.querySelector("#registre").style.display = "none";
+                document.querySelector("#federat").style.display = "block";
                 document.querySelector("#nFederat").value = animal.numregistre;
             }else if(animal.tipus.toLowerCase() === 'moix'){
                 document.querySelector("#registre").style.display = "none";
@@ -104,13 +106,8 @@
         } else {
             registre = "";
         }
-        console.log("entra");
-        console.log(nom);
-        console.log(sexe);
-        console.log(registre);
-        console.log(tipus);
 
-        //save(nom, tipus, registre, tipus);
+        save(nom, sexe, registre, tipus);
     }
 
     (function (){
