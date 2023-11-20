@@ -8,12 +8,14 @@
 
 
 <script type="module">
-    import {findAllCategories} from "../Servei/CategoriaService.js";
+    import {CategoriaService} from "../Servei/CategoriaService.js";
     import {findAllGaleries} from "../Servei/GaleriaService.js";
 
-    (function (){
+    (async () =>{
+        const categoriaService = new CategoriaService();
+        const categories = await categoriaService.findAllCategories();
+        console.log(categories);
         findAllGaleries();
-        findAllCategories()
     })();
 
 </script>

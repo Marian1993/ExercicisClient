@@ -1,13 +1,17 @@
-export async function findAllCategories(){
-    const peticio = await fetch(`https://theteacher.codiblau.com/public/exercicis/galeria/categories`)
+import {Categoria} from "../Model/Categoria.js";
 
-    const categoriaResolt = await peticio.json();
+export class CategoriaService{
+    async findAllCategories(){
+        const peticio = await fetch(`https://theteacher.codiblau.com/public/exercicis/galeria/categories`)
+        const categoriesResponse = await peticio.json();
+        const categoriaEntries = Object.entries(categoriesResponse);
 
-    console.log(typeof categoriaResolt);
-    console.log(categoriaResolt.length);
-
-    for (let i = 0; i < categoriaResolt.length; i++) {
-        console.log(categoriaResolt[i]);
-
+        const categories = [];
+        for (let i = 0; i <categoriaEntries.length; i++) {
+            const key = categoriaEntries[i][0];
+            const value = categoriaEntries[i][1];
+            categories.push(new Categoria(value,key));
+        }
+        return categories;
     }
 }

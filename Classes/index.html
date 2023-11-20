@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+<script type="module">
+    "use strict"
+
+    import {Persona} from "./Persona.js";
+
+    (() =>{
+        const tomeu = new Persona("Tomeu",30);
+        //tomeu.edat = 60;
+        console.log(tomeu.edat + " " + tomeu.getNomComplet());
+    })();
+
+</script>
+</body>
+</html>
