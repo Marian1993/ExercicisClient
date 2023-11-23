@@ -1,7 +1,7 @@
 import {Obra} from "../Model/Obra.js";
 
-export class GaleriaService {
-    async findAllGaleries() {
+export class ObraService {
+    async findAll() {
         const peticio = await fetch(`https://theteacher.codiblau.com/public/exercicis/galeria/list`)
 
         const galeriaResolt = await peticio.json();

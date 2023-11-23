@@ -5,19 +5,68 @@
     <title>Title</title>
 </head>
 <body>
-
+<div id="app">
+    <div id="categories"></div>
+    <div id="obres"></div>
+</div>
 
 <script type="module">
-    import {CategoriaService} from "../Servei/CategoriaService.js";
-    import {findAllGaleries} from "../Servei/GaleriaService.js";
+    import {GaleriaControlador} from "../Controlador/GaleriaControlador.js";
 
     (async () =>{
-        const categoriaService = new CategoriaService();
-        const categories = await categoriaService.findAllCategories();
-        console.log(categories);
-        findAllGaleries();
+        const galeriaControler = new GaleriaControlador();
+
+        const categories = await galeriaControler.findAllCategories();
+        const obres = await galeriaControler.findAllObres();
+
+        pintarCategories(categories,obres);
+        pintarObres(obres);
     })();
 
+    function pintarCategories(categories,obres) {
+        const container = document.querySelector("#categories");
+
+        const ulElement = document.createElement("UL");
+        for (const categoria of categories) {
+
+            const  liElement = document.createElement("LI");
+            liElement.innerText =categoria.getNom();
+            liElement.addEventListener('click',() =>{
+
+                const nomCategoria = liElement.innerHTML;
+                const obresFiltrades = obres.filter(o => o.getCategoriaObj().getNom() === nomCategoria);
+
+                pintarObres(obresFiltrades);
+            });
+            ulElement.appendChild(liElement);
+        }
+        container.appendChild(ulElement);
+    }
+
+    function pintarObres(obres) {
+        const container = document.querySelector("#obres");
+
+        container.innerHTML = "";
+        for (const obra of obres) {
+
+            const  divElement = document.createElement("DIV");
+            const  imgElement = document.createElement("IMG");
+
+            imgElement.src = obra.getUrl();
+            imgElement.alt = obra.getNom();
+            imgElement.style.width="200px";
+            imgElement.style.height="200px";
+
+            const  pElement = document.createElement("P");
+            pElement.innerText = obra.getNom();
+
+            divElement.appendChild(imgElement);
+            divElement.appendChild(pElement)
+            ;
+            container.appendChild(divElement);
+        }
+
+    }
 </script>
 </body>
 </html>

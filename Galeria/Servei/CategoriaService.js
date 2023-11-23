@@ -1,7 +1,7 @@
 import {Categoria} from "../Model/Categoria.js";
 
 export class CategoriaService{
-    async findAllCategories(){
+    async findAll(){
         const peticio = await fetch(`https://theteacher.codiblau.com/public/exercicis/galeria/categories`)
         const categoriesResponse = await peticio.json();
         const categoriaEntries = Object.entries(categoriesResponse);

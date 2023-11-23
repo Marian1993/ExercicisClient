@@ -3,6 +3,7 @@ export class Obra{
     #nom;
     #url;
     #categoria;
+    #categoriaObj;
 
     constructor(id,nom,url,categoria) {
         this.#id = id;
@@ -22,5 +23,11 @@ export class Obra{
     }
     getCategoria(){
         return this.#categoria;
+    }
+    getCategoriaObj(){
+        return this.#categoriaObj;
+    }
+    setCategoriaObj(categoria){
+        this.#categoriaObj = categoria;
     }
 }
