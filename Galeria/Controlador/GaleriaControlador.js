@@ -13,6 +13,11 @@ export class GaleriaControlador {
 
     async findAllObres(){
         const categories = await this.findAllCategories();
+        /*
+        const  categoriesCopia = [...categories];
+        console.log(categories,categoriesCopia);
+         */
+
         const obres = await this.#obraService.findAll();
         return obres.map(o =>{
             const categoriaSelected = categories.find(c => c.getNom() === o.getCategoria())
@@ -26,4 +31,5 @@ export class GaleriaControlador {
 
         return await this.#categoriaService.findAll();
     }
+
 }
