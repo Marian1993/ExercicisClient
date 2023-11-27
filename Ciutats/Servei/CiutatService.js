@@ -8,11 +8,17 @@ export class CiutatService{
         const ciutatsEntries = Object.entries(ciutatsResposta);
 
         const ciutat = [];
+
         for (let i = 0; i < ciutatsEntries.length; i++) {
 
             const key = ciutatsEntries[i][0];
-            const value = ciutatsEntries[i][1];
-            ciutat.push(new Ciutat(key,value));
+
+            for (let j = 0; j < ciutatsEntries[i][1].length; j++) {
+
+                const value = ciutatsEntries[i][1][j];
+
+                ciutat.push(new Ciutat(value,key));
+            }
         }
         return ciutat;
     }

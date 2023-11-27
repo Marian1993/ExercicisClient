@@ -18,8 +18,6 @@
         const ciutatsControlador = new CiutatControlador();
         const ciutats = await ciutatsControlador.findAllCiutats();
 
-
-
         pintarCiutats(ciutats);
 
     })();
@@ -29,36 +27,66 @@
 
         const tableElement = document.createElement("TABLE");
         const trElement = document.createElement("TR");
-
-        for (let i = 0; i < 3; i++) {
-
-
-
-        }
+        let contador = 0;
 
         for (const ciutat of ciutats) {
 
-            while (contador <= 3) {
+            if (contador <= 5){
 
                 tableElement.appendChild(trElement);
 
-                const tdElement1 = document.createElement("TD");
-                tdElement1.innerText = ciutat.getPais();
+                const tdElementC = document.createElement("TD");
+                const tdElementP = document.createElement("TD");
 
-                for (let j = 0; j < ciutat.getCiutats().length; j++) {
-                    const tdElement2 = document.createElement("TD");
-                    trElement.appendChild(tdElement1);
-                    console.log(tdElement1.value);
-                    tdElement2.innerText = ciutat.getCiutats()[j];
-                    trElement.appendChild(tdElement2);
-                    console.log(tdElement2.value);
+                //Ciutat
+                tdElementC.innerText = ciutat.getNom();
+                trElement.appendChild(tdElementC);
+                console.log(tdElementC.value);
 
-                }
-                contador++;
+                //Pais
+                tdElementP.innerText = ciutat.getPais();
+                trElement.appendChild(tdElementP);
+                console.log(tdElementP.value);
+
+                container.appendChild(tableElement);
+            }else {
+                break;
             }
+            contador++;
         }
-        container.appendChild(tableElement);
     }
+
+    /*
+    function pintarCiutats(ciutats){
+        const container = document.querySelector("#ciutats");
+
+        const tableElement = document.createElement("TABLE");
+        const trElement = document.createElement("TR");
+
+        for (let i = 0; i < 10; i++) {
+
+            tableElement.appendChild(trElement);
+
+            const tdElementC = document.createElement("TD");
+            const tdElementP = document.createElement("TD");
+
+            //Ciutat
+            tdElementC.innerText = ciutats.getNom();
+            trElement.appendChild(tdElementC);
+            console.log(tdElementC.value);
+
+            //Pais
+            tdElementP.innerText = ciutats.getPais();
+            trElement.appendChild(tdElementP);
+            console.log(tdElementP.value);
+
+            container.appendChild(tableElement);
+        }
+    }
+
+     */
+
+
 
 </script>
 </body>
