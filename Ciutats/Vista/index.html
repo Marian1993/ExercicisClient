@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h2>Cercador de  ciutats del món</h2>
+    <input type="text">
+    <div id="ciutats"></div>
+</div>
+<script type="module">
+
+    import {CiutatControlador} from "../Controlador/CiutatControlador.js";
+
+    (async () =>{
+        const ciutatsControlador = new CiutatControlador();
+        const ciutats = await ciutatsControlador.findAllCiutats();
+
+
+
+        pintarCiutats(ciutats);
+
+    })();
+
+    function pintarCiutats(ciutats){
+        const container = document.querySelector("#ciutats");
+
+        const tableElement = document.createElement("TABLE");
+        const trElement = document.createElement("TR");
+
+        for (let i = 0; i < 3; i++) {
+
+
+
+        }
+
+        for (const ciutat of ciutats) {
+
+            while (contador <= 3) {
+
+                tableElement.appendChild(trElement);
+
+                const tdElement1 = document.createElement("TD");
+                tdElement1.innerText = ciutat.getPais();
+
+                for (let j = 0; j < ciutat.getCiutats().length; j++) {
+                    const tdElement2 = document.createElement("TD");
+                    trElement.appendChild(tdElement1);
+                    console.log(tdElement1.value);
+                    tdElement2.innerText = ciutat.getCiutats()[j];
+                    trElement.appendChild(tdElement2);
+                    console.log(tdElement2.value);
+
+                }
+                contador++;
+            }
+        }
+        container.appendChild(tableElement);
+    }
+
+</script>
+</body>
+</html>

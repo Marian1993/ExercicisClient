@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="module">
+    import {AirportsService} from "../Servei/AirportService.js";
+
+    (async () =>{
+        const aiport = new AirportsService();
+
+        const llistaAirports = aiport.findAll();
+
+        for (let i = 0; i < llistaAirports.length; i++) {
+
+            console.log(llistaAirports[i]);
+        }
+
+    })();
+
+
+</script>
+</body>
+</html>
