@@ -7,7 +7,7 @@
 <body>
 <div id="app">
     <h2>Cercador de  ciutats del món</h2>
-    <input type="text">
+    <input id="cercador" type="text">
     <div id="ciutats"></div>
 </div>
 <script type="module">
@@ -18,74 +18,51 @@
         const ciutatsControlador = new CiutatControlador();
         const ciutats = await ciutatsControlador.findAllCiutats();
 
-        pintarCiutats(ciutats);
+        cercador(ciutats);
 
     })();
 
-    function pintarCiutats(ciutats){
-        const container = document.querySelector("#ciutats");
+    function pintarCiutats(ciutats, container){
 
         const tableElement = document.createElement("TABLE");
-        const trElement = document.createElement("TR");
-        let contador = 0;
 
-        for (const ciutat of ciutats) {
+        for (const ciutat of ciutats.slice(0,15)) {
 
-            if (contador <= 5){
-
-                tableElement.appendChild(trElement);
-
-                const tdElementC = document.createElement("TD");
-                const tdElementP = document.createElement("TD");
-
-                //Ciutat
-                tdElementC.innerText = ciutat.getNom();
-                trElement.appendChild(tdElementC);
-                console.log(tdElementC.value);
-
-                //Pais
-                tdElementP.innerText = ciutat.getPais();
-                trElement.appendChild(tdElementP);
-                console.log(tdElementP.value);
-
-                container.appendChild(tableElement);
-            }else {
-                break;
-            }
-            contador++;
-        }
-    }
-
-    /*
-    function pintarCiutats(ciutats){
-        const container = document.querySelector("#ciutats");
-
-        const tableElement = document.createElement("TABLE");
-        const trElement = document.createElement("TR");
-
-        for (let i = 0; i < 10; i++) {
-
-            tableElement.appendChild(trElement);
-
+            const trElement = document.createElement("TR");
             const tdElementC = document.createElement("TD");
             const tdElementP = document.createElement("TD");
 
             //Ciutat
-            tdElementC.innerText = ciutats.getNom();
+            tdElementC.innerText = ciutat.getNom();
             trElement.appendChild(tdElementC);
-            console.log(tdElementC.value);
 
             //Pais
-            tdElementP.innerText = ciutats.getPais();
+            tdElementP.innerText = ciutat.getPais();
             trElement.appendChild(tdElementP);
-            console.log(tdElementP.value);
 
-            container.appendChild(tableElement);
+            tableElement.appendChild(trElement);
+
         }
+        container.appendChild(tableElement);
+
     }
 
-     */
+    function cercador(ciutats) {
 
+        const container = document.querySelector("#ciutats");
+
+        document.querySelector("#cercador").addEventListener("input", (ev) =>{
+
+            const caracters = ev.target.value;
+
+            if(caracters.length >= 3){
+
+                container.innerHTML = "";
+                pintarCiutats(ciutats.filter(c => c.getNom().toLowerCase().match(caracters.toLowerCase())), container);
+            }
+        })
+        pintarCiutats(ciutats,container);
+    }
 
 
 </script>
