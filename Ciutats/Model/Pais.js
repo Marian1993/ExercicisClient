@@ -1,4 +1,4 @@
-class Pais{
+export class Pais{
     #nom
 
     constructor(nom) {

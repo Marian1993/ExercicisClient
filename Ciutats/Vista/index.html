@@ -12,6 +12,8 @@
 </div>
 <script type="module">
 
+    "use strict"
+
     import {CiutatControlador} from "../Controlador/CiutatControlador.js";
 
     (async () =>{
@@ -22,9 +24,11 @@
 
     })();
 
-    function pintarCiutats(ciutats, container){
+    function pintarCiutats(ciutats,cerca){
 
+        const container = document.querySelector("#ciutats");
         const tableElement = document.createElement("TABLE");
+        container.innerHTML = "";
 
         for (const ciutat of ciutats.slice(0,15)) {
 
@@ -32,24 +36,26 @@
             const tdElementC = document.createElement("TD");
             const tdElementP = document.createElement("TD");
 
+            let valorC = ciutat.getNom();
+            valorC = valorC.toUpperCase().replaceAll(cerca.toUpperCase(), `<span style="background: yellow;" >${cerca}</span>`);
+            let valor = ciutat.getNom();
+            valor = valor.toUpperCase().replaceAll(cerca.toUpperCase(), `<span style="background: yellow;" >${cerca}</span>`);
+
             //Ciutat
-            tdElementC.innerText = ciutat.getNom();
+            tdElementC.innerHTML = valor.toUpperCase();
             trElement.appendChild(tdElementC);
 
             //Pais
-            tdElementP.innerText = ciutat.getPais();
+            tdElementP.innerText = ciutat.getPais().getNom().toUpperCase();
             trElement.appendChild(tdElementP);
 
             tableElement.appendChild(trElement);
-
         }
         container.appendChild(tableElement);
-
     }
 
+    //Aquesta funcio es podria posar en es controller, aqui millor que nomes es pinti
     function cercador(ciutats) {
-
-        const container = document.querySelector("#ciutats");
 
         document.querySelector("#cercador").addEventListener("input", (ev) =>{
 
@@ -57,11 +63,10 @@
 
             if(caracters.length >= 3){
 
-                container.innerHTML = "";
-                pintarCiutats(ciutats.filter(c => c.getNom().toLowerCase().match(caracters.toLowerCase())), container);
+                //Filtra per ciutats i paisos
+                pintarCiutats(ciutats.filter(c => c.getNom().toUpperCase().match(caracters.toUpperCase()) || c.getPais().getNom().toUpperCase().match(caracters.toUpperCase())),caracters);
             }
         })
-        pintarCiutats(ciutats,container);
     }
 
 
