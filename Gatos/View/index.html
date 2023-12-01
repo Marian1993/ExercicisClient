@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+
+<script type="module">
+
+    "use strict"
+
+    import {CatListController} from "../Controller/CatListController.js";
+    import {ImageBreedsService} from "../Service/ImageBreedsService.js";
+
+    (async () => {
+
+        const raza = new CatListController();
+        const breeds = await raza.findAllBeeds();
+        const image = new ImageBreedsService();
+        const imageCats = await image.findAll();
+        console.log(imageCats);
+        //pintraLayout();
+        //pintarBreeds(breeds)
+    })();
+
+    function pintraLayout(){
+        const ulBreeds = document.createElement("UL");
+        ulBreeds.id="breeds";
+        const divCats = document.createElement("DIV")
+        divCats.id="cats";
+
+        const app = document.querySelector("#app");
+        app.appendChild(ulBreeds);
+        app.appendChild(divCats);
+    }
+    function pintarBreeds(breeds) {
+
+        const ul = document.querySelector("#breeds");
+        for (const breed of breeds) {
+
+            const li = document.createElement("LI");
+            li.innerHTML = breed.getNom();
+            ul.appendChild(li);
+        }
+
+    }
+
+</script>
+</body>
+</html>

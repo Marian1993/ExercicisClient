@@ -38,15 +38,15 @@
 
             let valorC = ciutat.getNom();
             valorC = valorC.toUpperCase().replaceAll(cerca.toUpperCase(), `<span style="background: yellow;" >${cerca}</span>`);
-            let valor = ciutat.getNom();
-            valor = valor.toUpperCase().replaceAll(cerca.toUpperCase(), `<span style="background: yellow;" >${cerca}</span>`);
+            let valorP = ciutat.getPais().getNom();
+            valorP = valorP.toUpperCase().replaceAll(cerca.toUpperCase(), `<span style="background: yellow;" >${cerca}</span>`);
 
             //Ciutat
-            tdElementC.innerHTML = valor.toUpperCase();
+            tdElementC.innerHTML = valorC.toUpperCase();
             trElement.appendChild(tdElementC);
 
             //Pais
-            tdElementP.innerText = ciutat.getPais().getNom().toUpperCase();
+            tdElementP.innerText = valorP.toUpperCase();
             trElement.appendChild(tdElementP);
 
             tableElement.appendChild(trElement);
