@@ -12,17 +12,18 @@
     "use strict"
 
     import {CatListController} from "../Controller/CatListController.js";
-    import {ImageBreedsService} from "../Service/ImageBreedsService.js";
+
 
     (async () => {
 
         const raza = new CatListController();
         const breeds = await raza.findAllBeeds();
-        const image = new ImageBreedsService();
-        const imageCats = await image.findAll();
-        console.log(imageCats);
-        //pintraLayout();
-        //pintarBreeds(breeds)
+        const moixos = await raza.findAllMoixos();
+
+        console.log(breeds);
+        console.log(moixos);
+        pintraLayout();
+        pintarBreeds(breeds,moixos);
     })();
 
     function pintraLayout(){
@@ -35,16 +36,46 @@
         app.appendChild(ulBreeds);
         app.appendChild(divCats);
     }
-    function pintarBreeds(breeds) {
+    function pintarBreeds(breeds,moixos) {
 
         const ul = document.querySelector("#breeds");
         for (const breed of breeds) {
 
             const li = document.createElement("LI");
             li.innerHTML = breed.getNom();
+            li.addEventListener('click',() =>{
+
+                const moixosFiltrats = moixos.filter(m =>{
+
+                    let trobat = false;
+                    m.getRaces()
+
+                    for (const racaMoix of m.getRaces()) {
+                        if(racaMoix.getId() === breed.getId()){
+
+                            trobat = true;
+                        }
+                    }
+                    return trobat;
+                });
+                pintarMoixos(moixosFiltrats)
+            })
             ul.appendChild(li);
         }
+    }
 
+    function pintarMoixos(moixos) {
+
+        const container = document.querySelector("#cats");
+        container.innerHTML = '';
+        for (const moix of moixos) {
+            const  divMoix = document.createElement("DIV");
+            const imgMoix = document.createElement("IMG");
+            imgMoix.src = moix.getUrl();
+
+            divMoix.appendChild(imgMoix);
+            container.appendChild(divMoix);
+        }
     }
 
 </script>

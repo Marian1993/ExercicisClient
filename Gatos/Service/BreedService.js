@@ -14,10 +14,10 @@ export class BreedService {
 
         const breedsRequest = await peticio.json();
 
-        return breedsRequest.map(json => this.#jsonToBreed(json))
+        return breedsRequest.map(json => BreedService.jsonToBreed(json))
     }
 
-    #jsonToBreed(json){
+    static jsonToBreed(json){
 
         return new Breed(json.id,json.name);
     }
