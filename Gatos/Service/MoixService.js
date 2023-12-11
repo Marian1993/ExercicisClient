@@ -1,9 +1,15 @@
 import {Moix} from "../Model/Moix.js";
 import {BreedService} from "./BreedService.js";
+import {VotService} from "./VotService.js";
 
 export class MoixService {
 
     #API_KEY = "live_7zx4rDlSh43TrNAd4vhl5XocdSY5UEKIWuPscIBUpDDAlD7DwNR3TARR2oQe6CP6";
+    #votService;
+
+    constructor() {
+        this.#votService = new VotService();
+    }
     async findAll() {
 
         const header = new Headers();
@@ -17,8 +23,17 @@ export class MoixService {
         })
 
         const moixos = await peticio.json();
+        const vots = await this.#votService.findAll();
 
-        return moixos.map(moix => MoixService.jsonToMoix(moix));
+        return moixos.map(m => {
+            const moix = MoixService.jsonToMoix(m);
+            const votsMoix = vots
+                .filter(idC =>idC.image_id === moix.getId())
+                .reduce((prev,current)=> prev + current.value,0);
+
+            moix.setVots(votsMoix);
+            return moix;
+        });
     }
 
     static jsonToMoix(json){

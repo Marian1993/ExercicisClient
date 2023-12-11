@@ -36,4 +36,10 @@ export class Moix {
     getRacesObj(){
         return this.#racesObj;
     }
+    getVots(){
+        return this.#vots;
+    }
+    setVots(vots){
+        this.#vots = vots;
+    }
 }

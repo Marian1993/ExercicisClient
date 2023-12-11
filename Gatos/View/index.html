@@ -16,14 +16,14 @@
 
     (async () => {
 
-        const raza = new CatListController();
-        const breeds = await raza.findAllBeeds();
-        const moixos = await raza.findAllMoixos();
+        const catList = new CatListController();
+        const breeds = await catList.findAllBeeds();
+        const moixos = await catList.findAllMoixos();
 
         console.log(breeds);
         console.log(moixos);
         pintraLayout();
-        pintarBreeds(breeds,moixos);
+        pintarBreeds(breeds,moixos,catList);
     })();
 
     function pintraLayout(){
@@ -36,7 +36,7 @@
         app.appendChild(ulBreeds);
         app.appendChild(divCats);
     }
-    function pintarBreeds(breeds,moixos) {
+    function pintarBreeds(breeds,moixos,catList) {
 
         const ul = document.querySelector("#breeds");
         for (const breed of breeds) {
@@ -58,13 +58,13 @@
                     }
                     return trobat;
                 });
-                pintarMoixos(moixosFiltrats)
+                pintarMoixos(moixosFiltrats,catList)
             })
             ul.appendChild(li);
         }
     }
 
-    function pintarMoixos(moixos) {
+    function pintarMoixos(moixos,catList) {
 
         const container = document.querySelector("#cats");
         container.innerHTML = '';
@@ -72,8 +72,28 @@
             const  divMoix = document.createElement("DIV");
             const imgMoix = document.createElement("IMG");
             imgMoix.src = moix.getUrl();
+            imgMoix.style.width="100px";
+            imgMoix.style.display="flex";
+
+            const vots = document.createElement("P");
+            vots.innerHTML = moix.getVots() + " vots";
+
+            //Votacions
+            const upVote = document.createElement("BUTTON");
+            upVote.innerText="UP";
+            upVote.addEventListener('click',function (){
+                catList.upVote(moix);
+            })
+            const downVote = document.createElement("BUTTON");
+            downVote.innerText="DOWN";
+            downVote.addEventListener('click',function (){
+                catList.downVote(moix);
+            })
 
             divMoix.appendChild(imgMoix);
+            divMoix.appendChild(vots);
+            divMoix.appendChild(upVote);
+            divMoix.appendChild(downVote);
             container.appendChild(divMoix);
         }
     }
