@@ -20,10 +20,10 @@
         const breeds = await catList.findAllBeeds();
         const moixos = await catList.findAllMoixos();
 
-        console.log(breeds);
-        console.log(moixos);
-        pintraLayout();
-        pintarBreeds(breeds,moixos,catList);
+
+        catList.findAllFavorites();
+        //pintraLayout();
+        //pintarBreeds(breeds,moixos,catList);
     })();
 
     function pintraLayout(){
@@ -90,10 +90,18 @@
                 catList.downVote(moix);
             })
 
+            //Favoritos
+            const favoriteVote = document.createElement("BUTTON");
+            favoriteVote.innerText="❤";
+            favoriteVote.addEventListener('click',function (){
+                catList.addFavorite(moix);
+            })
+
             divMoix.appendChild(imgMoix);
             divMoix.appendChild(vots);
             divMoix.appendChild(upVote);
             divMoix.appendChild(downVote);
+            divMoix.appendChild(favoriteVote);
             container.appendChild(divMoix);
         }
     }

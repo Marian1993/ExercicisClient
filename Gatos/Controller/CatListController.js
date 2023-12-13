@@ -1,17 +1,20 @@
 import {BreedService} from "../Service/BreedService.js";
 import {MoixService} from "../Service/MoixService.js";
 import {VotService} from "../Service/VotService.js";
+import {FavoriteService} from "../Service/FavoriteService.js";
 
 export class CatListController{
     #breedService;
     #moixService;
     #votsService;
+    #favoriteService;
 
     constructor() {
 
         this.#breedService = new BreedService();
         this.#moixService = new MoixService();
         this.#votsService = new VotService();
+        this.#favoriteService =  new FavoriteService();
     }
 
     findAllBeeds(){
@@ -22,6 +25,13 @@ export class CatListController{
 
         this.#votsService.findAll();
         return this.#moixService.findAll();
+    }
+
+    findAllFavorites(){
+        return this.#favoriteService.findAll();
+    }
+    addFavorite(moix){
+        this.#favoriteService.add(moix);
     }
 
     findAllVots(){

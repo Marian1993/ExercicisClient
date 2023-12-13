@@ -1,14 +1,17 @@
 import {Moix} from "../Model/Moix.js";
 import {BreedService} from "./BreedService.js";
 import {VotService} from "./VotService.js";
+import {FavoriteService} from "./FavoriteService.js";
 
 export class MoixService {
 
     #API_KEY = "live_7zx4rDlSh43TrNAd4vhl5XocdSY5UEKIWuPscIBUpDDAlD7DwNR3TARR2oQe6CP6";
     #votService;
+    #favoriteService;
 
     constructor() {
         this.#votService = new VotService();
+        this.#favoriteService = new FavoriteService();
     }
     async findAll() {
 
@@ -24,13 +27,17 @@ export class MoixService {
 
         const moixos = await peticio.json();
         const vots = await this.#votService.findAll();
+        const favorits = await this.#favoriteService.findAll();
 
         return moixos.map(m => {
             const moix = MoixService.jsonToMoix(m);
+            const favoriteMoix = favorits
+                .filter(idF => idF.image_id === moix.getId());
             const votsMoix = vots
-                .filter(idC =>idC.image_id === moix.getId())
+                .filter(idC => idC.image_id === moix.getId())
                 .reduce((prev,current)=> prev + current.value,0);
 
+            moix.
             moix.setVots(votsMoix);
             return moix;
         });

@@ -29,17 +29,16 @@ export class Moix {
     getRaces(){
         return this.#races;
     }
-
-    setRacesObj(races){
-        this.#racesObj = races;
-    }
-    getRacesObj(){
-        return this.#racesObj;
-    }
     getVots(){
         return this.#vots;
     }
     setVots(vots){
         this.#vots = vots;
+    }
+    getFavorits(){
+        return this.#favorits;
+    }
+    setFavorits(fav){
+        this.#favorits = fav;
     }
 }
