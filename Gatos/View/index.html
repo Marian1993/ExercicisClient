@@ -20,10 +20,8 @@
         const breeds = await catList.findAllBeeds();
         const moixos = await catList.findAllMoixos();
 
-
-        catList.findAllFavorites();
-        //pintraLayout();
-        //pintarBreeds(breeds,moixos,catList);
+        pintraLayout();
+        pintarBreeds(breeds,moixos,catList);
     })();
 
     function pintraLayout(){
@@ -77,6 +75,10 @@
 
             const vots = document.createElement("P");
             vots.innerHTML = moix.getVots() + " vots";
+            const favorite = document.createElement("P");
+            if(moix.getFavorits()){
+                favorite.innerText = "FAVORITO";
+            }
 
             //Votacions
             const upVote = document.createElement("BUTTON");
@@ -89,6 +91,11 @@
             downVote.addEventListener('click',function (){
                 catList.downVote(moix);
             })
+            const deleteVote = document.createElement("BUTTON");
+            deleteVote.innerText="DELETE";
+            deleteVote.addEventListener('click',function (){
+                catList.deleteVote(moix);
+            })
 
             //Favoritos
             const favoriteVote = document.createElement("BUTTON");
@@ -99,8 +106,10 @@
 
             divMoix.appendChild(imgMoix);
             divMoix.appendChild(vots);
+            divMoix.appendChild(favorite);
             divMoix.appendChild(upVote);
             divMoix.appendChild(downVote);
+            divMoix.appendChild(deleteVote);
             divMoix.appendChild(favoriteVote);
             container.appendChild(divMoix);
         }

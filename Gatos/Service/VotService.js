@@ -50,4 +50,17 @@ export class VotService{
             })
         })
     }
+
+    async delete(moix){
+        const header = new Headers();
+        header.append("Content-Type","application/json");
+        header.append("x-api-key",this.#API_KEY);
+
+        const votsFetch = await fetch(`https://api.thecatapi.com/v1/vote/${moix.getId()}`,{
+
+            method: 'DELETE',
+            headers: header,
+
+        })
+    }
 }

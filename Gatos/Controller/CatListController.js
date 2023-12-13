@@ -44,5 +44,24 @@ export class CatListController{
     downVote(moix){
         this.#votsService.votar(moix,-1);
     }
+    async deleteVote(moix){
+
+        const catList = await this.#moixService.findAll();
+        const listVots = await this.#votsService.findAll();
+
+        const vots = catList.map(cl =>{
+            return listVots.map(v => {
+                const list = []
+                if (v.image_id === cl.getId()){
+                    list.push(v.id)
+                }
+
+            })
+        });
+        console.log(vots);
+
+        //this.#votsService.delete(moix);
+
+    }
 
 }

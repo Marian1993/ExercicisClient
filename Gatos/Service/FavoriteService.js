@@ -41,7 +41,7 @@ export class FavoriteService{
         header.append("Content-Type","application/json");
         header.append("x-api-key",this.#API_KEY);
 
-        const votsFetch = await fetch(`https://api.thecatapi.com/v1/votes`,{
+        const votsFetch = await fetch(`https://api.thecatapi.com/v1/favourites`,{
 
             method: 'POST',
             headers: header,

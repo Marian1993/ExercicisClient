@@ -3,8 +3,8 @@ export class Moix {
     #id
     #url;
     #races;
-    #racesObj
     #vots
+    #idVots;
     #favorits
 
     constructor(id,url) {
@@ -34,6 +34,12 @@ export class Moix {
     }
     setVots(vots){
         this.#vots = vots;
+    }
+    getidVots(){
+        return this.#idVots;
+    }
+    setidVots(id){
+        this.#idVots = id;
     }
     getFavorits(){
         return this.#favorits;

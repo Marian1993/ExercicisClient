@@ -32,13 +32,15 @@ export class MoixService {
         return moixos.map(m => {
             const moix = MoixService.jsonToMoix(m);
             const favoriteMoix = favorits
-                .filter(idF => idF.image_id === moix.getId());
+                .find(idF => idF.image_id === moix.getId());
+
             const votsMoix = vots
                 .filter(idC => idC.image_id === moix.getId())
                 .reduce((prev,current)=> prev + current.value,0);
 
-            moix.
+            moix.setFavorits(favoriteMoix);
             moix.setVots(votsMoix);
+
             return moix;
         });
     }
