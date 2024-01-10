@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Butterfly+Kids');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #333;
+    background-image: url("../img/20082.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    font-family: 'Butterfly Kids', cursive;
+    color: black;
+    text-align: center;
+    font-size: 26px;
+    padding: 15px;
+}
+
+header,main{
+    background: rgba(255,255,255,0.9);
+    padding: 10px;
+    width: 650px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+main {
+    text-align: center;
+}
+
+canvas {
+    font-family: 'Butterfly Kids', cursive;
+    display: block;
+    margin: 0 auto;
+}
+
+button {
+    font-family: 'Butterfly Kids', cursive;
+    font-size: 26px;
+    padding: 5px;
+}
+
+.seccio{
+    margin: 15px 0;
+}
+
+ul, li{
+    list-style: none;
+}
